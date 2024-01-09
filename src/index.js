@@ -1,7 +1,4 @@
-// **************************************************
-// *   import 'normalize.css' дописать в json.файл  *
-// *   "dependencies": {                            *
-// *    "normalize.css": "^8.0.1"                   *
-// *   }                                            *
-// **************************************************
+import './styles/reset.css';
 import './styles/main.scss';
+
+console.log('STARTED');
