@@ -1,8 +1,200 @@
-body {
-	background-color: grey;
+@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;700&display=swap');
+
+$whiteColor: #FFFFFF;
+$lightColor: #DFE3E9;
+$darkColor-1: #7F8FA4;
+$darkColor-2: #516173;
+$darkColor-3: #354052;
+$blueColor: #3A9EFF;
+$yellowColor: #FFB300;
+
+
+
+html {
+	font-size: 10px;
 }
 
-h1 {
-	color: red;
-	font-size: 40px;
+body {
+	font-family: 'Golos Text', sans-serif;
+	font-weight: 400;
+	font-size: 1.6rem;
+}
+
+.sidebar {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 5.6rem;
+	height: 100vh;
+	background-color: $darkColor-3;
+	z-index: 999;
+
+	&__items {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		width: 5.6rem;
+		height: 5.6rem;
+
+		&__img-size {
+			position: relative;
+			width: 3.2rem;
+			height: 3.2rem;
+			cursor: pointer;
+		}
+
+		&__logo {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			width: 5.5rem;
+			height: 5.5rem;
+			font-weight: 700;
+			font-size: 2.4rem;
+			line-height: 100%;
+			text-transform: uppercase;
+			color: $darkColor-2;
+			background: linear-gradient(0deg, #3A9EFF -251.25%, #ECF6FF 50%);
+			cursor: pointer;
+		}
+	}
+
+	&__under-line {
+
+		&::after {
+			content: '';
+			position: relative;
+			display: block;
+			width: 3.2rem;
+			height: 0.1rem;
+			background-color: $darkColor-2;
+			bottom: -1rem;
+		}
+	}
+
+	&_alert {
+		&::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 0;
+			display: block;
+			background-image: url('../images/sidebar/svg/counter-alert.svg');
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: auto;
+			width: 1.5rem;
+			height: 1.5rem;
+			border-radius: 50%;
+		}
+	}
+
+	&__question {
+		position: fixed;
+		bottom: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 5.6rem;
+		height: 6.4rem;
+
+		&__img {
+			width: 3.6rem;
+			height: 3.6rem;
+			padding: 0.8rem;
+			background-color: $yellowColor;
+			border-radius: 50%;
+			cursor: pointer;
+		}
+	}
+}
+
+._active-link {
+	&::after {
+		content: '';
+		position: relative;
+		display: block;
+		width: 100%;
+		height: 0.2rem;
+		background-color: $blueColor;
+		bottom: -1.8rem;
+		z-index: 2;
+	}
+}
+
+.header {
+	background-color: $darkColor-3;
+
+	&__logo {
+		display: block;
+		background-image: url(../images/header/svg/logo.svg);
+		width: 12rem;
+		height: 3.2rem;
+	}
+
+	&__add {
+		display: block;
+		background-image: url(../images/header/svg/plus-button.svg);
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: auto;
+		background-color: $blueColor;
+		border-radius: 50%;
+		width: 3.6rem;
+		height: 3.6rem;
+		cursor: pointer;
+	}
+
+	&__nav {
+		font-weight: 500;
+		line-height: 115%;
+		margin-left: 1rem;
+
+		&__items {
+			display: flex;
+			align-items: center;
+			gap: 1.8rem;
+		}
+
+		&__item {
+
+			&__link {
+				color: $whiteColor;
+
+				&_more {
+					display: block;
+					background-image: url(../images/header/svg/more-button.svg);
+					background-repeat: no-repeat;
+					background-position: center center;
+					background-size: auto;
+					width: 3.4rem;
+					height: 3.4rem;
+				}
+			}
+		}
+	}
+
+	&::after {
+		content: '';
+		position: relative;
+		display: block;
+		width: 100%;
+		height: 0.2rem;
+		background-color: $darkColor-2;
+		bottom: 0;
+	}
+}
+
+.header-container {
+	display: flex;
+	align-items: center;
+	gap: 2.4rem;
+	padding: 0.8rem 1.6rem;
 }
