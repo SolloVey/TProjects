@@ -1,25 +1,145 @@
 @import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;700&display=swap');
 
 $whiteColor: #FFFFFF;
+$footerColor: #E9EDF1;
 $lightColor: #DFE3E9;
+$lightColor-1: #EFF3F6;
+$lightColor-2: #C2CAD4;
 $darkColor-1: #7F8FA4;
 $darkColor-2: #516173;
 $darkColor-3: #354052;
+$scrollColor: #1F8EFA;
 $blueColor: #3A9EFF;
 $yellowColor: #FFB300;
 
-
-
 html {
 	font-size: 10px;
+	height: 100%;
 }
 
 body {
 	font-family: 'Golos Text', sans-serif;
 	font-weight: 400;
 	font-size: 1.6rem;
+	height: 100%;
+	overflow: hidden;
 }
 
+.wrapper {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+._active-link {
+	&::after {
+		content: '';
+		position: relative;
+		display: block;
+		width: 100%;
+		height: 0.2rem;
+		background-color: $blueColor;
+		bottom: -1.9rem;
+		z-index: 2;
+	}
+}
+
+._work-btn {
+	background-color: $blueColor;
+	padding: 1.2rem;
+	border-radius: 0.4rem;
+}
+
+.scrollbar-style {
+
+	&::-webkit-scrollbar {
+		width: 5px;
+		background-color: $whiteColor;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: $scrollColor;
+		border-radius: 2rem;
+	}
+}
+
+.container {
+	max-width: 100vw;
+	padding: 0rem 7.2rem 0rem 1.6rem;
+}
+
+.container-desktop {
+	max-width: 1880px;
+	padding: 0.2rem 1.3rem 0rem 1.6rem;
+}
+
+// HEADER
+.header {
+	position: fixed;
+	width: 100vw;
+	top: 0;
+	left: 0;
+	background-color: $darkColor-3;
+	border-bottom: 0.2rem solid $darkColor-2;
+
+	&__logo {
+		display: block;
+		background-image: url(../images/header/svg/logo.svg);
+		width: 12rem;
+		height: 3.2rem;
+	}
+
+	&__add {
+		display: block;
+		background-image: url(../images/header/svg/plus-button.svg);
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: auto;
+		background-color: $blueColor;
+		border-radius: 50%;
+		width: 3.6rem;
+		height: 3.6rem;
+		cursor: pointer;
+	}
+
+	&__nav {
+		font-weight: 500;
+		line-height: 115%;
+		margin-left: 1rem;
+
+		&__items {
+			display: flex;
+			align-items: center;
+			gap: 1.8rem;
+		}
+
+		&__item {
+
+			&__link {
+				color: $whiteColor;
+
+				&_more {
+					display: block;
+					background-image: url(../images/header/svg/more-button.svg);
+					background-repeat: no-repeat;
+					background-position: center center;
+					background-size: auto;
+					width: 3.4rem;
+					height: 3.4rem;
+				}
+			}
+		}
+	}
+}
+
+.header-container {
+	display: flex;
+	align-items: center;
+	gap: 2.4rem;
+	padding: 0.9rem 1.6rem;
+}
+
+// SIDEBAR
 .sidebar {
 	position: fixed;
 	top: 0;
@@ -108,94 +228,178 @@ body {
 		&__img {
 			width: 3.6rem;
 			height: 3.6rem;
-			padding: 0.8rem;
 			background-color: $yellowColor;
 			border-radius: 50%;
 			cursor: pointer;
+			z-index: 999;
 		}
 	}
 }
 
-._active-link {
-	&::after {
-		content: '';
-		position: relative;
-		display: block;
-		width: 100%;
-		height: 0.2rem;
-		background-color: $blueColor;
-		bottom: -1.9rem;
-		z-index: 2;
-	}
-}
+.sidebar-horizontal {
+	position: fixed;
+	width: 100vw;
+	top: 5.6rem;
+	background: $whiteColor;
+	border-bottom: 1px solid $lightColor;
 
-.header {
-	background-color: $darkColor-3;
-	border-bottom: 0.2rem solid $darkColor-2;
-
-	&__logo {
-		display: block;
-		background-image: url(../images/header/svg/logo.svg);
-		width: 12rem;
-		height: 3.2rem;
+	&__wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0.8rem 0rem;
 	}
 
-	&__add {
-		display: block;
-		background-image: url(../images/header/svg/plus-button.svg);
-		background-repeat: no-repeat;
-		background-position: center center;
-		background-size: auto;
-		background-color: $blueColor;
-		border-radius: 50%;
-		width: 3.6rem;
-		height: 3.6rem;
-		cursor: pointer;
+	&__vertical-line {
+
+		&::after {
+			content: '';
+			position: relative;
+			display: block;
+			width: 0.1rem;
+			height: 2rem;
+			background-color: $lightColor;
+			margin: 0rem 1.6rem;
+		}
 	}
 
-	&__nav {
-		font-weight: 500;
+	&__menu {
+		display: flex;
+		align-items: center;
+		font-weight: 700;
 		line-height: 115%;
-		margin-left: 1rem;
+		color: $darkColor-3;
 
-		&__items {
+		&__tasks {
 			display: flex;
 			align-items: center;
-			gap: 1.8rem;
+			text-transform: uppercase;
+			letter-spacing: -0.6px;
+
+			&_job {
+				display: inline-block;
+				cursor: pointer;
+			}
 		}
 
-		&__item {
+		&__date {
+			display: flex;
+			align-items: center;
+			gap: 0.8rem;
 
-			&__link {
-				color: $whiteColor;
+			&_day {
+				color: $blueColor;
+			}
+		}
 
-				&_more {
-					display: block;
-					background-image: url(../images/header/svg/more-button.svg);
-					background-repeat: no-repeat;
-					background-position: center center;
-					background-size: auto;
-					width: 3.4rem;
-					height: 3.4rem;
-				}
+		&__weather {
+			display: flex;
+			align-items: center;
+			gap: 0.8rem;
+
+			&_icon {
+				width: 2.4rem;
+				height: 2.4rem;
+			}
+
+			&_img {
+				object-fit: contain;
+				object-position: 50% 50%;
 			}
 		}
 	}
 
-	// &::after {
-	// 	content: '';
-	// 	position: relative;
-	// 	display: block;
-	// 	width: 100%;
-	// 	height: 0.2rem;
-	// 	background-color: $darkColor-2;
-	// 	bottom: 0;
-	// }
+	&__action {
+		display: flex;
+		align-items: center;
+		font-weight: 700;
+		font-size: 1.4rem;
+		line-height: 115%;
+		letter-spacing: -0.7px;
+		text-transform: uppercase;
+		color: $whiteColor;
+		gap: 1.6rem;
+
+		&__bg-style {
+			display: block;
+			width: 2.4rem;
+			height: 2.4rem;
+			background-size: auto;
+			background-repeat: no-repeat;
+			cursor: pointer;
+		}
+
+		&__more {
+			background-image: url('../images/sidebar-horizontal/more-button.svg');
+		}
+
+		&__question {
+			background-image: url('../images/sidebar-horizontal/question.svg');
+		}
+
+		&__add {
+
+			&_btn {
+				display: inline-block;
+				cursor: pointer;
+			}
+		}
+	}
 }
 
-.header-container {
+// MAIN
+.main {
+	margin-top: 11.2rem;
+	background-color: $lightColor-1;
+	flex-grow: 1;
+
+	&__desktop {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 1.6rem;
+		width: 184.8rem;
+		height: 86vh;
+		padding-top: 1.4rem;
+		overflow-y: scroll;
+	}
+}
+
+.widget {
+	min-width: 60rem;
+	min-height: 52rem;
+	border-radius: 4px;
+	border: 0.2rem dashed $lightColor-2;
+}
+
+// FOOTER
+.footer {
 	display: flex;
 	align-items: center;
-	gap: 2.4rem;
-	padding: 0.9rem 1.6rem;
+	justify-content: end;
+	font-size: 1.3rem;
+	line-height: 120%;
+	color: $darkColor-1;
+	background-color: $footerColor;
+	padding: 0.6rem 0rem;
+
+	&__wrap {
+		display: flex;
+		align-items: center;
+		padding-right: 7rem;
+	}
+
+	&__copyright {
+		display: flex;
+		align-items: center;
+
+		&::after {
+			content: '';
+			display: block;
+			width: 0.1rem;
+			height: 1.6rem;
+			background-color: $lightColor;
+			margin: 0rem 0.8rem 0rem 0.8rem;
+		}
+	}
 }
