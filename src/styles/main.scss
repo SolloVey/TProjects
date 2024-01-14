@@ -102,16 +102,29 @@ body {
 // SUB-MENU
 .sub-menu {
 	position: absolute;
+	top: 100%;
 	right: 8px;
 	display: flex;
 	flex-direction: column;
-	width: 20rem;
+	min-width: 20rem;
 	padding: 0.8rem 0rem;
-
 	background-color: $whiteColor;
 	border-radius: 0.4rem;
 	box-shadow: 0px 5px 27px 0px rgba(27, 36, 49, 0.05), 0px 13px 20px 0px rgba(25, 32, 42, 0.15);
 	z-index: 1111;
+
+	&__close {
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		transition: all 0.3s ease 0s;
+	}
+
+	&__open {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: all;
+	}
 
 	&__item {
 		font-size: 1.4rem;
@@ -464,13 +477,12 @@ body {
 	}
 
 	&__action {
-		position: relative;
 		min-height: 52rem;
 		height: 52rem;
 		background-color: $whiteColor;
 		border-radius: 0.8rem;
 		border: 1px solid $lightColor;
-		z-index: 10;
+		border-top: none;
 	}
 
 	&__header {
@@ -479,7 +491,6 @@ body {
 		border-bottom: 0.1rem solid $lightColor;
 
 		&__line {
-			position: relative;
 			top: -1px;
 			padding: 0.2rem 0rem;
 			border-radius: 0.8rem 0.8rem 0rem 0rem;
@@ -703,6 +714,13 @@ body {
 				}
 			}
 		}
+
+		&__canvas {
+			// width: 100% !important;
+			// height: 100% !important;
+			width: 36.5rem !important;
+			height: 36.5rem !important;
+		}
 	}
 
 	&__footer {
@@ -797,7 +815,7 @@ body {
 }
 
 .tippy-box[data-placement^='top']>.tippy-arrow::before {
-	border-bottom-color: $tooltipColor !important;
+	border-top-color: $tooltipColor !important;
 }
 
 
