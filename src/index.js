@@ -14,8 +14,6 @@ let taskDp = new AirDatepicker('#task-calendar', {
 	range: true,
 });
 
-taskDp.hide();
-
 import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 
@@ -33,7 +31,7 @@ const firstCanvas = document
 
 // const subMenuBtn = document.querySelector('.open-sub-menu');
 // const subMenuBtns = document.querySelectorAll('.open-sub-menu');
-const fillColorSVG = document.querySelector('#fillColor');
+// const fillColorSVG = document.querySelector('#fillColor');
 // const fillColorsSVG = document.querySelectorAll('#fillColor');
 const activeItemsSubMenu = document.querySelectorAll('.sub-menu__item');
 const subMenu = document.querySelectorAll('.sub-menu');
@@ -47,13 +45,8 @@ const sideBarMenuCloseBTN = document.querySelector(
 // const widgetHeaderDesc = document.querySelector('.widget__header__desc');
 const widget = document.querySelector('.widget__active');
 
-// ***** alert side-bar *****
-const alertIcon = document
-	.querySelector('.sidebar__alert')
-	.closest('.sidebar__item__todo');
-// const alertIcon = getComputedStyle(alertElement, '::after').content;
-// const alertContent = alertIcon.getPropetyValue('alertContent');
-// console.log(alertIcon);
+// ***** sidebar *****
+const sideBarItems = document.querySelectorAll('.sidebar__el');
 // ********************
 // ***** calendar *****
 const inputTaskCalendar = document.querySelector('.widget__header__desc__date');
@@ -76,11 +69,39 @@ const deleteWidgetBtn = document.querySelector('.delete-widget');
 // const removeWidget = document.querySelectorAll('.popup-close');
 const closePopupBtn = document.querySelector('.close-popup');
 // *****************
+// ***** horizontal side bar *****
+const sideBarMoreBtn = document.querySelector(
+	'.sidebar-horizontal__action__more'
+);
+const sideBarMoreList = document.querySelector('.sidebar-horizontal-sub');
+const horizontalSideBarList = document.querySelector(
+	'.sidebar-horizontal__menu__sub__list'
+);
+// *******************************
+
+function openHorizontalSideBarMenu() {
+	sideBarMoreList.classList.add('sidebar-horizontal-sub__open');
+}
+
+function closeHorizontalSideBarMenu() {
+	sideBarMoreList.classList.remove('sidebar-horizontal-sub__open');
+}
+
+function selectedItemHorizontalSideBar(e) {
+	let itemActive = document.querySelector('.__active');
+	let newActiveItem = e.target.closest('.sidebar-horizontal__menu__sub__item');
+
+	if (horizontalSideBarList === e.target || itemActive === newActiveItem)
+		return;
+	newActiveItem.classList.add('__active');
+	if (newActiveItem.classList.contains('__active')) {
+		itemActive.classList.remove('__active');
+	}
+	closeHorizontalSideBarMenu();
+}
 
 function showCalendar() {
 	calendar.classList.toggle('none');
-	// console.log(taskDp);
-	// taskDp.hide();
 }
 
 if (popupLinks.length > 0) {
@@ -190,7 +211,7 @@ function toggleSubMenu(e) {
 	changeColorSvg(e);
 }
 
-function closeSubMenu(item) {
+function closeSubMenu() {
 	subMenu.forEach(item => {
 		item.classList.remove('sub-menu__open');
 		// console.log(item);
@@ -247,19 +268,33 @@ function changeColorSvg(e) {
 	// }
 }
 
-function showSubMenuList(e) {
-	closeUserMenu(e);
-	// console.log(e.target);
-
-	if (e.target.classList.contains('sidebar__item__todo')) {
+function selectedItemSideBar(e) {
+	if (e.target.closest('.sidebar__item')) {
+		e.target.closest('.sidebar__item').classList.add('sidebar__item__active');
 	}
+}
 
-	// console.log(e.target.closest('.sidebar__item__todo').firstElementChild);
-	sideBarMenuList.classList.add('sidebar-menu_action');
-
+function addAlertIconSideBar(e) {
 	e.target
 		.closest('.sidebar__item__todo')
 		.firstElementChild.classList.add('sidebar__alert_visible');
+}
+
+function showSubMenuList(e) {
+	closeUserMenu(e);
+
+	// ***************** ПЕРЕПИСАТЬ Ф-ИЮ КЛИКА ПО ЭЛЕМЕНТА SIDE-BAR ****************************
+	// if (e.target.closest('.sidebar__item')) {
+	// 	// console.log(e.target.closest('.sidebar__item'));
+	// 	e.target.closest('.sidebar__item').classList.add('sidebar__item__active');
+	// }
+	selectedItemSideBar(e);
+	// *******************************************************************************************
+	// console.log(e.target);
+	sideBarMenuList.classList.add('sidebar-menu_action');
+	// ******************* ADD ALERT ***************************************************************
+	addAlertIconSideBar(e);
+	// *********************************************************************************************
 	// changeColorSvg();
 
 	// e.target.firstElementChild.style.fill = '#1F8EFA';
@@ -270,6 +305,11 @@ function showSubMenuList(e) {
 
 function closeSubMenuList() {
 	sideBarMenuList.classList.remove('sidebar-menu_action');
+	sideBarItems.forEach(e => {
+		if (e.classList.contains('sidebar__item__active')) {
+			e.classList.remove('sidebar__item__active');
+		}
+	});
 }
 
 function toggleSupport() {
@@ -299,3 +339,5 @@ userBtn.addEventListener('click', toggleUserMenu);
 closePopupBtn.addEventListener('click', popupClose);
 deleteWidgetBtn.addEventListener('click', removeWidget);
 inputTaskCalendar.addEventListener('click', showCalendar);
+sideBarMoreBtn.addEventListener('click', openHorizontalSideBarMenu);
+horizontalSideBarList.addEventListener('click', selectedItemHorizontalSideBar);
