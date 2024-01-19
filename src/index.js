@@ -47,8 +47,14 @@ const sideBarMenuCloseBTN = document.querySelector(
 // const widgetHeaderDesc = document.querySelector('.widget__header__desc');
 const widget = document.querySelector('.widget__active');
 
-// console.log(subMenu);
-
+// ***** alert side-bar *****
+const alertIcon = document
+	.querySelector('.sidebar__alert')
+	.closest('.sidebar__item__todo');
+// const alertIcon = getComputedStyle(alertElement, '::after').content;
+// const alertContent = alertIcon.getPropetyValue('alertContent');
+// console.log(alertIcon);
+// ********************
 // ***** calendar *****
 const inputTaskCalendar = document.querySelector('.widget__header__desc__date');
 const calendar = document.querySelector('.task-calendar');
@@ -242,16 +248,20 @@ function changeColorSvg(e) {
 }
 
 function showSubMenuList(e) {
-	closeUserMenu();
+	closeUserMenu(e);
 	// console.log(e.target);
 
 	if (e.target.classList.contains('sidebar__item__todo')) {
 	}
 
-	// console.log(e.target.firstElementChild);
-	// console.log(e.target.firstElementChild.style.fill);
+	// console.log(e.target.closest('.sidebar__item__todo').firstElementChild);
 	sideBarMenuList.classList.add('sidebar-menu_action');
+
+	e.target
+		.closest('.sidebar__item__todo')
+		.firstElementChild.classList.add('sidebar__alert_visible');
 	// changeColorSvg();
+
 	// e.target.firstElementChild.style.fill = '#1F8EFA';
 
 	// console.log(e.target.classList.contains('sidebar__item__img-size'));

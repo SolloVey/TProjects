@@ -681,20 +681,24 @@ body {
 		}
 	}
 
-	&_alert {
-		&::after {
-			content: '';
-			position: absolute;
-			top: 0;
-			right: 0;
-			display: block;
-			background-image: url('../images/sidebar/svg/counter-alert.svg');
-			background-position: center center;
-			background-repeat: no-repeat;
-			background-size: auto;
-			width: 1.5rem;
-			height: 1.5rem;
-			border-radius: 50%;
+	&__alert {
+		position: absolute;
+		top: 0;
+		right: 0;
+		display: block;
+		background-image: url('../images/sidebar/svg/counter-alert.svg');
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: auto;
+		width: 1.5rem;
+		height: 1.5rem;
+		border-radius: 50%;
+		opacity: 0;
+		visibility: hidden;
+
+		&_visible {
+			opacity: 1;
+			visibility: visible;
 		}
 	}
 
@@ -849,6 +853,7 @@ body {
 				display: flex;
 				flex-direction: column;
 				gap: 0.4rem;
+				cursor: pointer;
 
 				&__wrapper {
 					display: flex;
@@ -969,6 +974,7 @@ body {
 				display: flex;
 				flex-direction: column;
 				gap: 0.4rem;
+				cursor: pointer;
 			}
 		}
 	}
