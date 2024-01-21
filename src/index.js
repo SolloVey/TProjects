@@ -3,16 +3,16 @@ import './styles/main.scss';
 
 import Chart from 'chart.js/auto';
 
-import AirDatepicker from 'air-datepicker';
-import 'air-datepicker/air-datepicker.css';
-import ru from 'air-datepicker/locale/ru';
+// import AirDatepicker from 'air-datepicker';
+// import 'air-datepicker/air-datepicker.css';
+// import ru from 'air-datepicker/locale/ru';
 
-let taskDp = new AirDatepicker('#task-calendar', {
-	locale: ru,
-	inline: false,
-	visible: false,
-	range: true,
-});
+// let taskDp = new AirDatepicker('#task-calendar', {
+// 	locale: ru,
+// 	inline: false,
+// 	visible: false,
+// 	range: true,
+// });
 
 import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
@@ -31,17 +31,27 @@ const firstCanvas = document
 
 // const subMenuBtn = document.querySelector('.open-sub-menu');
 // const subMenuBtns = document.querySelectorAll('.open-sub-menu');
-// const fillColorSVG = document.querySelector('#fillColor');
-// const fillColorsSVG = document.querySelectorAll('#fillColor');
+
+// ***** header *****
+const headerMoreBtn = document.querySelector('.header__nav__item__link_more');
+// ******************
+
+// ***** sub-menu *****
 const activeItemsSubMenu = document.querySelectorAll('.sub-menu__item');
 const subMenu = document.querySelectorAll('.sub-menu');
-const subMenuSvgFooter = document.querySelector('.sub-menu__svg');
 const sideBarMenuCloseBTN = document.querySelector(
 	'.sidebar-menu__header__content__close-btn'
 );
-// const widgetHeaderWrapper = document.querySelector('.widget__header__wrapper');
-// const widgetHeaderDesc = document.querySelector('.widget__header__desc');
+// ********************
+
+// ***** widget *****
 const widget = document.querySelector('.widget__active');
+const widgetMoreBtns = document.querySelectorAll('.widget__header__more-btn');
+const widgetHeaderWrapper = document.querySelectorAll(
+	'.widget__header__wrapper'
+);
+const widgetHeaderDesc = document.querySelectorAll('.widget__header__desc');
+// ******************
 
 // ***** calendar *****
 const inputTaskCalendar = document.querySelector('.widget__header__desc__date');
@@ -93,7 +103,7 @@ const horizontalSideBarList = document.querySelector(
 );
 // *******************************
 
-// ***** HORISONTAL SIDE-BAR *****
+// ********************** HORISONTAL SIDE-BAR ************************************************
 function openHorizontalSideBarMenu() {
 	sideBarMoreList.classList.add('sidebar-horizontal-sub__open');
 }
@@ -114,15 +124,15 @@ function selectedItemHorizontalSideBar(e) {
 	}
 	closeHorizontalSideBarMenu();
 }
-// *******************************
+// *******************************************************************************************
 
-// ******* CALENDAR ***********
+// ********************** CALENDAR ***********************************************************
 function showCalendar() {
 	calendar.classList.toggle('none');
 }
-// ****************************
+// *******************************************************************************************
 
-// ******* POP-UP**************
+// ********************** POP-UP**************************************************************
 if (popupLinks.length > 0) {
 	for (let i = 0; i < popupLinks.length; i++) {
 		const popupLink = popupLinks[i];
@@ -143,7 +153,7 @@ function popupClose() {
 	let curentPopup = document.querySelector('.popup__open');
 	curentPopup.classList.remove('popup__open');
 }
-// ****************************
+// *******************************************************************************************
 
 function removeWidget() {
 	widget.closest('.widget__active').classList.add('widget__remove');
@@ -153,7 +163,7 @@ function removeWidget() {
 	console.log(widget.closest('.widget').className);
 }
 
-// ***** ПЕРВЫЙ ГРАФИК *****
+// ********************** ПЕРВЫЙ ГРАФИК ******************************************************
 const dataTasks = [
 	{ name: 'Александра', volume: 55, units: '%' },
 	{ name: 'Владимир', volume: 5, units: '%' },
@@ -207,11 +217,39 @@ const createCircleChart = (name, volume) => {
 	let chart = new Chart(firstCanvas, firstConfig);
 };
 // console.log(firstCanvas);
-// *************************
+// *******************************************************************************************
 
+// ********************** WIDGET *************************************************************
+function removePositionWrapper() {
+	widgetHeaderWrapper.forEach(e => e.classList.remove('position-sub'));
+}
+function togglePositionWrapper() {
+	widgetHeaderWrapper.forEach(e => e.classList.toggle('position-sub'));
+}
+function addPositionWrapper() {
+	widgetHeaderWrapper.forEach(e => e.classList.add('position-sub'));
+}
+function togglePositionRelative() {
+	widgetHeaderDesc.forEach(e => {
+		e.classList.toggle('position-sub');
+	});
+}
+function removePositionRelative() {
+	widgetHeaderDesc.forEach(e => {
+		e.classList.remove('position-sub');
+	});
+}
+function addPositionRelative() {
+	widgetHeaderDesc.forEach(e => {
+		e.classList.add('position-sub');
+	});
+}
+// *******************************************************************************************
+
+// ********************** SUB-MENU ***********************************************************
 document.querySelector('body').addEventListener('click', e => {
 	if (!e.target.closest('.open-sub-menu')) {
-		closeSubMenu();
+		closeSubMenu(e);
 		return;
 	} else {
 		toggleSubMenu(e);
@@ -219,8 +257,6 @@ document.querySelector('body').addEventListener('click', e => {
 });
 
 function toggleSubMenu(e) {
-	// console.log(e.target);
-
 	document
 		.querySelector(
 			`.sub-menu[data-sub-menu=${
@@ -229,19 +265,27 @@ function toggleSubMenu(e) {
 		)
 		.classList.toggle('sub-menu__open');
 
-	if (e.target.closest('.svg-el')) {
-		toggleColorIcon(e);
-	}
+	activeColorIcon(e);
 }
 
 function closeSubMenu() {
+	whiteColorIcon(headerMoreBtn);
+	addPositionWrapper();
+	addPositionRelative();
+
 	subMenu.forEach(item => {
 		item.classList.remove('sub-menu__open');
 	});
-	// whiteColorIcon();
-}
 
-// ********************** СМЕНА ЦВЕТА SVG *****************************************************
+	widgetMoreBtns.forEach(item => {
+		greyColorIcon(item);
+		item.classList.remove('widget__header__more-btn_active');
+	});
+	// добавить remove e.target.closest('.svg-el').classList.add('btn-active');
+}
+// *********************************************************************************************
+
+// ********************** СМЕНА ЦВЕТА SVG ******************************************************
 activeItemsSubMenu.forEach(elem => {
 	elem.addEventListener('mouseenter', () => {
 		elem.classList.add('sub-menu__item_active');
@@ -251,9 +295,11 @@ activeItemsSubMenu.forEach(elem => {
 				'sub-menu__item__link_active'
 			);
 			if (
-				subMenuSvgFooter.firstElementChild.style.fill == 'rgb(127, 143, 164)'
+				elem.firstElementChild.firstElementChild.firstElementChild.style.fill ==
+				'rgb(127, 143, 164)'
 			) {
-				subMenuSvgFooter.firstElementChild.style.fill = '#1F8EFA';
+				elem.firstElementChild.firstElementChild.firstElementChild.style.fill =
+					'#1F8EFA';
 			}
 		}
 	});
@@ -266,61 +312,98 @@ activeItemsSubMenu.forEach(elem => {
 				'sub-menu__item__link_active'
 			);
 			if (
-				subMenuSvgFooter.firstElementChild.style.fill == 'rgb(31, 142, 250)'
+				elem.firstElementChild.firstElementChild.firstElementChild.style.fill ==
+				'rgb(31, 142, 250)'
 			) {
-				subMenuSvgFooter.firstElementChild.style.fill = 'rgb(127, 143, 164)';
+				elem.firstElementChild.firstElementChild.firstElementChild.style.fill =
+					'rgb(127, 143, 164)';
 			}
 		}
 	});
 });
 
-function toggleColorIcon(e) {
-	document.querySelector(
-		`.fill-color[data-fill-color=${
-			e.target.closest('.svg-el').dataset.fillColor
-		}]`
-	).style.fill = '#3A9EFF';
+function activeColorIcon(e) {
+	// ****** Click moreBtn in WIDGET *****
+	if (e.target.closest('.widget__header__more-btn')) {
+		let fillSvg = document.querySelector(
+			`.fill-color[data-fill-color=${
+				e.target.closest('.svg-el').dataset.fillColor
+			}]`
+		).style.fill;
 
-	// sideBarItems.forEach(
-	// 	e => {
-	// 		if (!e.classList.contains('sidebar__item__active')) {
-	// 			// console.log(e.contains('.sidebar__alert'));
-	// 		}
-	// 	}
-	// 	// console.log(e.classList.contains('sidebar__item__active')) /* true */
-	// );
+		e.target
+			.closest('.widget__header__more-btn')
+			.classList.toggle('widget__header__more-btn_active');
 
-	// 	document.querySelector(
-	// 		`.fill-color[data-fill-color=${
-	// 			e.target.closest('.sidebar__el').dataset.fillColor
-	// 		}]`
-	// 	).style.fill = 'fill: rgb(255, 255, 255)';
+		if (fillSvg === 'rgb(81, 97, 115)') {
+			document.querySelector(
+				`.fill-color[data-fill-color=${
+					e.target.closest('.svg-el').dataset.fillColor
+				}]`
+			).style.fill = 'rgb(58, 158, 255)';
+		}
 
-	// console.log(e.target.closest('.svg-el'));
-	// console.log(e);
-	// console.log(
-	// 	document.querySelector(
-	// 		`.fill-color[data-fill-color=${
-	// 			e.target.closest('.sidebar__el').dataset.fillColor
-	// 		}]`
-	// 	)
-	// );
-	// console.log(e.target.closest('.sidebar__el').dataset.fillColor);
+		if (fillSvg === 'rgb(58, 158, 255)') {
+			document.querySelector(
+				`.fill-color[data-fill-color=${
+					e.target.closest('.svg-el').dataset.fillColor
+				}]`
+			).style.fill = 'rgb(81, 97, 115)';
+		}
+	}
+	// ****** Click moreBtn in HEADER *****
+	if (e.target.closest('.header__nav__item__link_more')) {
+		togglePositionWrapper();
+		togglePositionRelative();
+
+		let fillSvg = document.querySelector(
+			`.fill-color[data-fill-color=${
+				e.target.closest('.svg-el').dataset.fillColor
+			}]`
+		).style.fill;
+
+		if (fillSvg === 'rgb(255, 255, 255)') {
+			document.querySelector(
+				`.fill-color[data-fill-color=${
+					e.target.closest('.svg-el').dataset.fillColor
+				}]`
+			).style.fill = 'rgb(58, 158, 255)';
+		}
+
+		if (fillSvg === 'rgb(58, 158, 255)') {
+			document.querySelector(
+				`.fill-color[data-fill-color=${
+					e.target.closest('.svg-el').dataset.fillColor
+				}]`
+			).style.fill = 'rgb(255, 255, 255)';
+		}
+	}
+	// ****** Click SIDE-BAR *****
+	if (e.target.closest('.sidebar__el')) {
+		// Ф-ия переклюцения цвета иконки в правом side-bar
+		console.log('!!!TRUE!!!');
+		// togglePositionWrapper();
+	}
 }
 
-function whiteColorIcon(e) {
-	// document.querySelector(
-	// 	`.fill-color[data-fill-color=${
-	// 		e.target.closest('.svg-el').dataset.fillColor
-	// 	}]`
-	// ).style.fill = '#FFFFFF';
-
+function whiteColorIconSideBar(e) {
 	document.querySelector(
 		`.fill-color[data-fill-color=${e.closest('.svg-el').dataset.fillColor}]`
 	).style.fill = '#FFFFFF';
-
-	// console.log(e);
 }
+
+function whiteColorIcon(e) {
+	document.querySelector(
+		`.fill-color[data-fill-color=${e.closest('.svg-el').dataset.fillColor}]`
+	).style.fill = '#FFFFFF';
+}
+
+function greyColorIcon(e) {
+	document.querySelector(
+		`.fill-color[data-fill-color=${e.closest('.svg-el').dataset.fillColor}]`
+	).style.fill = '#516173';
+}
+
 // *********************************************************************************************
 
 // ********************** ПРАВЫЙ SIDE-BAR ******************************************************
@@ -328,12 +411,31 @@ function whiteColorIcon(e) {
 function selectedItemSideBar(e) {
 	// ********************************************************************************
 	// написать ф-ию работающую по всем элементам списка
+	// console.log(e.target.closest('.sidebar__el'));
+
+	let fillSvg = document.querySelector(
+		`.fill-color[data-fill-color=${
+			e.target.closest('.svg-el').dataset.fillColor
+		}]`
+	).style.fill;
+
+	if (fillSvg === 'rgb(255, 255, 255)') {
+		document.querySelector(
+			`.fill-color[data-fill-color=${
+				e.target.closest('.svg-el').dataset.fillColor
+			}]`
+		).style.fill = 'rgb(58, 158, 255)';
+	}
+	removePositionWrapper();
+
+	// *************************************************
+	// вкл. активного фона под иконкой sidebar и выкл. разделительной линии
 	if (e.target.closest('.sidebar__item')) {
 		closeUserMenu(e);
 		e.target.closest('.sidebar__item').classList.add('sidebar__item__active');
 		e.target.closest('.sidebar__el').classList.remove('sidebar__under-line');
 		// console.log(e.target.closest('.sidebar__el'));
-		toggleColorIcon(e);
+		activeColorIcon(e);
 	}
 	// ********************************************************************************
 }
@@ -346,6 +448,7 @@ function addAlertIconSideBar(e) {
 }
 // *********************
 
+// ***** Правое всплывающее sidebar-menu *****
 function showSubMenuList(e) {
 	// ***************** ПЕРЕПИСАТЬ Ф-ИЮ КЛИКА ПО ЭЛЕМЕНТА SIDE-BAR ****************************
 	// if (e.target.closest('.sidebar__item')) {
@@ -371,13 +474,13 @@ function closeSubMenuList() {
 		if (e.classList.contains('sidebar__item__active')) {
 			e.classList.remove('sidebar__item__active');
 			e.classList.add('sidebar__under-line');
-			// console.log(e);
-			// console.log(e.classList);
-			whiteColorIcon(e);
+			whiteColorIconSideBar(e);
 		}
 	});
 }
+// *******************************************
 
+// ***** Поддержка пользователя *****
 function toggleSupport() {
 	support.classList.toggle('user-support__open');
 }
@@ -385,7 +488,9 @@ function toggleSupport() {
 function closeSupport() {
 	support.classList.remove('user-support__open');
 }
+// **********************************
 
+// ***** Панель пользователя *****
 function closeUserMenu() {
 	userMenu.classList.remove('set-user__open');
 }
@@ -393,14 +498,12 @@ function closeUserMenu() {
 function toggleUserMenu() {
 	userMenu.classList.toggle('set-user__open');
 }
+// *******************************
 
 // *********************************************************************************************
 
-// function toggleColorSupportImg() {}
-
 createCircleChart(name, volume);
 sideBarMenuBTN.addEventListener('click', showSubMenuList);
-// sideBarItemList.addEventListener('click', showSubMenuList);
 sideBarMenuCloseBTN.addEventListener('click', closeSubMenuList);
 supportBtn.addEventListener('click', toggleSupport);
 closeSupportBtn.addEventListener('click', closeSupport);
