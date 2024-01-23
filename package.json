@@ -23,6 +23,8 @@
 	},
 	"dependencies": {
 		"chart.js": "^4.4.1",
+		"chartjs-chart-funnel": "^4.1.8",
+		"chartjs-plugin-datalabels": "^2.2.0",
 		"html-webpack-plugin": "^5.5.0",
 		"tippy.js": "^6.3.7"
 	}

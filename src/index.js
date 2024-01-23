@@ -2,6 +2,13 @@ import './styles/reset.css';
 import './styles/main.scss';
 
 import Chart from 'chart.js/auto';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+
+// import Chart, { LinearScale, CategoryScale } from 'chart.js';
+import { FunnelController, TrapezoidElement } from 'chartjs-chart-funnel';
+
+// register controller in chart.js and ensure the defaults are set
+Chart.register(FunnelController, TrapezoidElement, ChartDataLabels);
 
 // import AirDatepicker from 'air-datepicker';
 // import 'air-datepicker/air-datepicker.css';
@@ -25,12 +32,174 @@ tippy('[data-tippy-content]', {
 
 console.log('STARTED');
 
+// ********************** ПЕРВЫЙ ГРАФИК ******************************************************
 const firstCanvas = document
 	.querySelector('.widget__main__canvas')
 	.getContext('2d');
 
+const dataTasks = [
+	{ name: 'Александра', volume: 55, units: '%' },
+	{ name: 'Владимир', volume: 5, units: '%' },
+	{ name: 'Тимур', volume: 10, units: '%' },
+	{ name: 'Денис', volume: 10, units: '%' },
+	{ name: 'Ангелина Сейт', volume: 20, units: '%' },
+];
+let name = dataTasks.map(item => `${item.name} (${item.volume}${item.units})`);
+let volume = dataTasks.map(item => item.volume);
+const createCircleChart = (name, volume) => {
+	const firstData = {
+		labels: name,
+		datasets: [
+			{
+				data: volume,
+				backgroundColor: [
+					'rgb(58, 158, 255)',
+					'rgb(0, 188, 212)',
+					'rgb(255, 179, 0)',
+					'rgb(16, 171, 79)',
+					'rgb(103, 58, 183)',
+				],
+				hoverOffset: 4,
+				rotation: 72,
+			},
+		],
+	};
+
+	const firstConfig = {
+		type: 'doughnut',
+		data: firstData,
+		options: {
+			plugins: {
+				datalabels: {
+					labels: {
+						title: null,
+					},
+				},
+				legend: {
+					display: true,
+					position: 'bottom',
+					align: 'start',
+					labels: {
+						boxWidth: 18,
+						boxHeight: 18,
+						padding: 13,
+						usePointStyle: true,
+						pointStyle: 'circle',
+						useBorderRadius: true,
+						borderRadius: 0,
+					},
+				},
+			},
+		},
+	};
+	let chart = new Chart(firstCanvas, firstConfig);
+};
+// *******************************************************************************************
+
 // const subMenuBtn = document.querySelector('.open-sub-menu');
 // const subMenuBtns = document.querySelectorAll('.open-sub-menu');
+
+// ********************** ВТОРОЙ ГРАФИК ******************************************************
+const secondFunnelCanvas = document
+	.querySelector('.widget__main__canvas__funnel')
+	.getContext('2d');
+
+const dataFunnel = [
+	{ deal: 'Новый лид:', quantity: 1, volume: 1.49 },
+	{ deal: 'Взяли в работу:', quantity: 2, volume: 1.39 },
+	{ deal: 'Квалифицирован:', quantity: 1, volume: 1.24 },
+	{ deal: 'Бриф отправлен:', quantity: 0, volume: 1.14 },
+	{ deal: 'Бриф согласован:', quantity: 1, volume: 1.14 },
+	{ deal: 'Договор/счет выставлен:', quantity: 1, volume: 1.14 },
+	{ deal: 'Предоплата получена:', quantity: 1, volume: 1.14 },
+];
+let nameFunnel = dataFunnel.map(item => `${item.deal}  ${item.quantity}`);
+let volumeFunnel = dataFunnel.map(item => item.volume);
+const createFunnelChart = (nameFunnel, volumeFunnel) => {
+	const secondData = {
+		labels: nameFunnel,
+		datasets: [
+			{
+				data: volumeFunnel,
+				backgroundColor: [
+					'#00BCD4',
+					'#3A9EFF',
+					'#673AB7',
+					'#FFB300',
+					'#00BCD4',
+					'#FFB300',
+					'#FF3031',
+				],
+				borderColor: 'transparent',
+				borderWidth: 0,
+				align: 'center',
+				shrinkAnchor: 'top',
+			},
+		],
+	};
+
+	// funnelLabelsLine plugin
+	const funnelLabelsLine = {
+		id: 'funnelLabelsLine',
+		afterDraw(chart, args, options) {
+			const {
+				ctx,
+				chartArea: { top, bottom, left, right, width, height },
+			} = chart;
+			chart.data.datasets.forEach((dataset, i) => {
+				chart.getDatasetMeta(i).data.forEach((datapoint, index) => {
+					const { x, y } = datapoint.tooltipPosition();
+
+					// Draw line
+					// Line
+					ctx.beginPath();
+					ctx.moveTo(x, y);
+					ctx.lineTo(x + 92, y);
+					ctx.strokeStyle = dataset.backgroundColor[index];
+					ctx.lineWidth = '2';
+					ctx.stroke();
+
+					// Text
+					ctx.font = '13px Golos Text, sans-serif';
+
+					// Control the position
+					ctx.textBaseline = 'middle';
+					ctx.fillText(chart.data.labels[index], x + 102, y);
+					console.log(ctx);
+				});
+			});
+		},
+	};
+
+	const secondConfig = {
+		type: 'funnel',
+		data: secondData,
+		options: {
+			layout: {
+				padding: {
+					top: 7,
+					right: 358,
+					left: 0,
+				},
+			},
+			maintainAspectRatio: false,
+			indexAxis: 'y',
+			plugins: {
+				tooltip: {
+					enabled: false,
+				},
+				datalabels: {
+					labels: {
+						title: null,
+					},
+				},
+			},
+		},
+		plugins: [ChartDataLabels, funnelLabelsLine],
+	};
+	let chart = new Chart(secondFunnelCanvas, secondConfig);
+};
+// *******************************************************************************************
 
 // ***** header *****
 const headerMoreBtn = document.querySelector('.header__nav__item__link_more');
@@ -162,62 +331,6 @@ function removeWidget() {
 	popupClose();
 	console.log(widget.closest('.widget').className);
 }
-
-// ********************** ПЕРВЫЙ ГРАФИК ******************************************************
-const dataTasks = [
-	{ name: 'Александра', volume: 55, units: '%' },
-	{ name: 'Владимир', volume: 5, units: '%' },
-	{ name: 'Тимур', volume: 10, units: '%' },
-	{ name: 'Денис', volume: 10, units: '%' },
-	{ name: 'Ангелина Сейт', volume: 20, units: '%' },
-];
-let name = dataTasks.map(item => `${item.name} (${item.volume}${item.units})`);
-let volume = dataTasks.map(item => item.volume);
-const createCircleChart = (name, volume) => {
-	const firstData = {
-		labels: name,
-		datasets: [
-			{
-				data: volume,
-				backgroundColor: [
-					'rgb(58, 158, 255)',
-					'rgb(0, 188, 212)',
-					'rgb(255, 179, 0)',
-					'rgb(16, 171, 79)',
-					'rgb(103, 58, 183)',
-				],
-				hoverOffset: 4,
-				rotation: 72,
-			},
-		],
-	};
-
-	const firstConfig = {
-		type: 'doughnut',
-		data: firstData,
-		options: {
-			plugins: {
-				legend: {
-					display: true,
-					position: 'bottom',
-					align: 'start',
-					labels: {
-						boxWidth: 18,
-						boxHeight: 18,
-						padding: 13,
-						usePointStyle: true,
-						pointStyle: 'circle',
-						useBorderRadius: true,
-						borderRadius: 0,
-					},
-				},
-			},
-		},
-	};
-	let chart = new Chart(firstCanvas, firstConfig);
-};
-// console.log(firstCanvas);
-// *******************************************************************************************
 
 // ********************** WIDGET *************************************************************
 function removePositionWrapper() {
@@ -403,7 +516,6 @@ function greyColorIcon(e) {
 		`.fill-color[data-fill-color=${e.closest('.svg-el').dataset.fillColor}]`
 	).style.fill = '#516173';
 }
-
 // *********************************************************************************************
 
 // ********************** ПРАВЫЙ SIDE-BAR ******************************************************
@@ -499,10 +611,11 @@ function toggleUserMenu() {
 	userMenu.classList.toggle('set-user__open');
 }
 // *******************************
-
 // *********************************************************************************************
 
 createCircleChart(name, volume);
+createFunnelChart(nameFunnel, volumeFunnel);
+
 sideBarMenuBTN.addEventListener('click', showSubMenuList);
 sideBarMenuCloseBTN.addEventListener('click', closeSubMenuList);
 supportBtn.addEventListener('click', toggleSupport);
