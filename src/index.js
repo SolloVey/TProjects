@@ -1,34 +1,51 @@
 import './styles/reset.css';
 import './styles/main.scss';
 
+// ********************** CALENDAR ***********************************************************
+// import { easepick } from '@easepick/core';
+import { easepick } from '@easepick/bundle';
+import { RangePlugin } from '@easepick/range-plugin';
+
+// const picker = new easepick.create({
+// 	element: '#datepickerFirst',
+// 	css: ['https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css'],
+// 	zIndex: 10,
+// 	lang: 'ru-RU',
+// 	grid: 2,
+// 	calendars: 2,
+// 	readonly: false,
+// 	autoApply: false,
+// 	header: 'Старт Старт-Финиш',
+// 	locale: {
+// 		previousMonth: '',
+// 		nextMonth: '',
+// 		cancel: 'Сбросить',
+// 		apply: 'Применить',
+// 	},
+// 	RangePlugin: {
+// 		strict: false,
+// 		tooltip: false,
+// 	},
+// 	plugins: ['RangePlugin'],
+// });
+// *******************************************************************************************
+
+// ********************** DIAGRAM ************************************************************
 import Chart from 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-
-// import Chart, { LinearScale, CategoryScale } from 'chart.js';
 import { FunnelController, TrapezoidElement } from 'chartjs-chart-funnel';
-
 // register controller in chart.js and ensure the defaults are set
 Chart.register(FunnelController, TrapezoidElement, ChartDataLabels);
+// *******************************************************************************************
 
-// import AirDatepicker from 'air-datepicker';
-// import 'air-datepicker/air-datepicker.css';
-// import ru from 'air-datepicker/locale/ru';
-
-// let taskDp = new AirDatepicker('#task-calendar', {
-// 	locale: ru,
-// 	inline: false,
-// 	visible: false,
-// 	range: true,
-// });
-
+// ********************** TOOLTIP ************************************************************
 import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
-
-// tooltip
 tippy('[data-tippy-content]', {
 	arrow: true,
 	delay: [300, 0],
 });
+// *******************************************************************************************
 
 console.log('STARTED');
 
@@ -160,12 +177,12 @@ const createFunnelChart = (nameFunnel, volumeFunnel) => {
 					ctx.stroke();
 
 					// Text
-					ctx.font = '13px Golos Text, sans-serif';
 
 					// Control the position
 					ctx.textBaseline = 'middle';
+					ctx.font = '13px Golos Text, sans-serif';
 					ctx.fillText(chart.data.labels[index], x + 102, y);
-					console.log(ctx);
+					// console.log(ctx);
 				});
 			});
 		},
@@ -223,8 +240,62 @@ const widgetHeaderDesc = document.querySelectorAll('.widget__header__desc');
 // ******************
 
 // ***** calendar *****
-const inputTaskCalendar = document.querySelector('.widget__header__desc__date');
-const calendar = document.querySelector('.task-calendar');
+// const inputTaskCalendar = document.querySelector('.widget__header__desc__date');
+// const calendar = document.querySelector('.task-calendar');
+const arrowPrevious =
+	'<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.7071 3.46056C11.0976 3.85108 11.0976 4.48425 10.7071 4.87477L6.58084 9.001H15.8333C16.3856 9.001 16.8333 9.44871 16.8333 10.001C16.8333 10.5533 16.3856 11.001 15.8333 11.001H6.58084L10.7071 15.1272C11.0976 15.5177 11.0976 16.1509 10.7071 16.5414C10.3165 16.932 9.68338 16.932 9.29285 16.5414L3.45952 10.7081C3.06899 10.3176 3.06899 9.68441 3.45952 9.29389L9.29285 3.46056C9.68338 3.07003 10.3165 3.07003 10.7071 3.46056Z" fill="#516173"/></svg>';
+const arrowNext =
+	'<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.29487 3.46056C9.68539 3.07003 10.3186 3.07003 10.7091 3.46056L16.5424 9.29389C16.9329 9.68441 16.9329 10.3176 16.5424 10.7081L10.7091 16.5414C10.3186 16.932 9.68539 16.932 9.29487 16.5414C8.90434 16.1509 8.90434 15.5177 9.29487 15.1272L13.4211 11.001H4.16864C3.61636 11.001 3.16864 10.5533 3.16864 10.001C3.16864 9.44871 3.61636 9.001 4.16864 9.001H13.4211L9.29487 4.87477C8.90434 4.48425 8.90434 3.85108 9.29487 3.46056Z" fill="#516173"/></svg>';
+
+const pickerTask = new easepick.create({
+	element: '#datepickerTask',
+	css: ['https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css'],
+	zIndex: 10,
+	lang: 'ru-RU',
+	format: 'DD.MM.YY',
+	grid: 2,
+	calendars: 2,
+	readonly: true,
+	autoApply: false,
+	header: 'Срок Старт-Финиш',
+	locale: {
+		previousMonth: arrowPrevious,
+		nextMonth: arrowNext,
+		cancel: 'Сбросить',
+		apply: 'Применить',
+	},
+	RangePlugin: {
+		strict: false,
+		tooltip: false,
+	},
+	plugins: [RangePlugin],
+});
+console.log(pickerTask);
+// pickerTask.renderAll();
+
+const pickerDeals = new easepick.create({
+	element: '#datepickerDeals',
+	css: ['https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css'],
+	zIndex: 10,
+	lang: 'ru-RU',
+	format: 'DD.MM.YY',
+	grid: 2,
+	calendars: 2,
+	readonly: false,
+	autoApply: false,
+	header: 'Срок Старт-Финиш',
+	locale: {
+		previousMonth: arrowPrevious,
+		nextMonth: arrowNext,
+		cancel: 'Сбросить',
+		apply: 'Применить',
+	},
+	RangePlugin: {
+		strict: false,
+		tooltip: false,
+	},
+	plugins: [RangePlugin],
+});
 // ********************
 
 // ***** sidebar *****
@@ -296,9 +367,9 @@ function selectedItemHorizontalSideBar(e) {
 // *******************************************************************************************
 
 // ********************** CALENDAR ***********************************************************
-function showCalendar() {
-	calendar.classList.toggle('none');
-}
+// function showCalendar() {
+// 	calendar.classList.toggle('none');
+// }
 // *******************************************************************************************
 
 // ********************** POP-UP**************************************************************
@@ -623,6 +694,6 @@ closeSupportBtn.addEventListener('click', closeSupport);
 userBtn.addEventListener('click', toggleUserMenu);
 closePopupBtn.addEventListener('click', popupClose);
 deleteWidgetBtn.addEventListener('click', removeWidget);
-inputTaskCalendar.addEventListener('click', showCalendar);
+// inputTaskCalendar.addEventListener('click', showCalendar);
 sideBarMoreBtn.addEventListener('click', openHorizontalSideBarMenu);
 horizontalSideBarList.addEventListener('click', selectedItemHorizontalSideBar);

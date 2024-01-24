@@ -1247,8 +1247,7 @@ body {
 				color: $darkColor-2;
 			}
 
-			&__period,
-			&__date {
+			&__period {
 				cursor: pointer;
 
 				&::after {
@@ -1257,6 +1256,23 @@ body {
 					width: 100%;
 					height: 0.1rem;
 					background-color: $blueColor;
+				}
+			}
+
+			&__date {
+				width: 13rem;
+				border-bottom: 0.1rem solid $blueColor;
+				font-weight: 500;
+				font-size: 1.4rem;
+				line-height: 1.6rem;
+				color: $darkColor-3;
+				cursor: pointer;
+
+				&::placeholder {
+					font-weight: 500;
+					font-size: 1.4rem;
+					line-height: 1.6rem;
+					color: $darkColor-3;
 				}
 			}
 		}
@@ -1430,8 +1446,6 @@ body {
 			height: 36.5rem !important;
 
 			&__funnel {
-				// padding-top: 1rem !important;
-				// padding-left: 1.6rem !important;
 				width: 94% !important;
 				height: 36rem !important;
 			}
@@ -1657,10 +1671,10 @@ body {
 	}
 }
 
-.air-datepicker-global-container {
-	left: 13.2rem !important;
-	top: 1.7rem !important;
-}
+// .air-datepicker-global-container {
+// 	left: 13.2rem !important;
+// 	top: 1.7rem !important;
+// }
 
 //TASK-CALENDAR
 // .task-calendar {
