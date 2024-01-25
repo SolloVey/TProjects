@@ -262,6 +262,242 @@ const arrowPrevious =
 const arrowNext =
 	'<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.29487 3.46056C9.68539 3.07003 10.3186 3.07003 10.7091 3.46056L16.5424 9.29389C16.9329 9.68441 16.9329 10.3176 16.5424 10.7081L10.7091 16.5414C10.3186 16.932 9.68539 16.932 9.29487 16.5414C8.90434 16.1509 8.90434 15.5177 9.29487 15.1272L13.4211 11.001H4.16864C3.61636 11.001 3.16864 10.5533 3.16864 10.001C3.16864 9.44871 3.61636 9.001 4.16864 9.001H13.4211L9.29487 4.87477C8.90434 4.48425 8.90434 3.85108 9.29487 3.46056Z" fill="#516173"/></svg>';
 
+// const pickerTerm = new easepick.create({
+// 	element: '#calendarTerm',
+// 	// css: ['https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css'],
+// 	css: function (s) {
+// 		// console.log(s);
+// 		const cssLinks = [
+// 			'https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.0/dist/index.css',
+// 		];
+// 		cssLinks.forEach(cssLink => {
+// 			const link = document.createElement('link');
+// 			link.href = cssLink;
+// 			link.rel = 'stylesheet';
+// 			const onReady = () => {
+// 				this.cssLoaded++;
+
+// 				if (this.cssLoaded === cssLinks.length) {
+// 					this.ui.wrapper.style.display = '';
+// 				}
+// 			};
+// 			link.addEventListener('load', onReady);
+// 			link.addEventListener('error', onReady);
+// 			// console.log(link);
+
+// 			this.ui.shadowRoot.append(link);
+// 			this.ui.container.classList.add('term-calendar');
+
+// 			// console.log(this.ui.container);
+// 		});
+
+// 		/* append custom style css */
+// 		const css = `
+// 						:host {
+// 							--color-bg-secondary: #ffffff;
+// 							--color-fg-muted: #7F8FA4;
+// 							--day-width: 32px;
+// 							--day-height: 32px;
+// 							--color-fg-selected: #fff;
+// 							--color-fg-accent: #1F8EFA;
+// 							--color-bg-inrange: #ECF6FF;
+// 							--color-fg-primary: #ffffff;
+// 							--color-btn-secondary-bg: #fff;
+// 							--color-btn-secondary-border: #748194;
+// 							--color-btn-secondary-fg: #748194;
+// 							--color-fg-default: #516173;
+// 							--color-btn-primary-disabled-bg: #1F8EFA;
+// 							--color-btn-primary-bg: #1F8EFA;
+// 							--color-btn-primary-hover-bg: #1F8EFA;
+// 						}
+// 						.term-calendar {
+// 							position: fixed;
+// 							top: 80px !important;
+// 						}
+// 						.container {
+// 							font-family: 'Golos Text', sans-serif;
+// 							font-weight: 500;
+// 							font-size: 14px;
+// 							line-height: 18px;
+// 							width: 532px;
+// 							box-shadow: 0px 5px 27px 0px rgba(27, 36, 49, 0.05), 0px 13px 20px 0px rgba(27, 36, 49, 0.15);
+//             }
+// 						.container>header {
+//     					background-color: var(--color-bg-secondary) !important;
+//     					padding: 12px 16px;
+// 							border-bottom: 2px solid #DFE3E9;
+// 						}
+// 						.container>footer {
+// 							background-color: var(--color-bg-secondary) !important;
+//     					padding: 16px 16px;
+// 							border-top: 1px solid #DFE3E9;
+// 						}
+// 						.calendar-header {
+// 							display: flex;
+// 							align-items: center;
+// 							justify-content: space-between;
+// 						}
+// 						._active-term {
+// 							color: #354052;
+// 						}
+// 						._active-term::after {
+// 							content: '';
+// 							position: absolute;
+// 							display: block;
+// 							width: 100%;
+// 							height: 2px;
+// 							background-color: #1F8EFA;
+// 							bottom: -14px;
+// 						}
+//             .calendar-header__term {
+// 							display: flex;
+// 							align-items: center;
+// 							gap: 16px;
+// 							font-size: 16px;
+// 						}
+// 						.calendar-header__term__wrap {
+// 							position: relative;
+// 							display: flex;
+// 							align-items: center;
+// 							gap: 6px;
+// 							padding: 8px 4px;
+// 							cursor: pointer;
+// 						}
+// 						.calendar-header__close {
+// 							width: 24px;
+// 							height: 24px;
+// 							cursor: pointer;
+// 						}
+// 						.calendar>.header .month-name {
+// 							font-weight: 400;
+// 							line-height: 20px;
+// 							font-size: 16px;
+// 							color: #354052;
+// 						}
+// 						.calendar>.header .month-name>span {
+// 							font-weight: 400;
+// 						}
+// 						.calendar>.header button {
+// 							padding: 0px 0px;
+// 							width: 20px;
+// 							height: 20px;
+// 						}
+// 						.calendar>.header button>img, .calendar>.header button>svg {
+// 							transform: none;
+// 						}
+// 						.calendar>.daynames-row>.dayname {
+// 							font-weight: 400 !important;
+// 							color: var(--color-fg-muted);
+// 							padding: 7px 8px;
+// 							line-height: 18px;
+// 						}
+// 						.calendar>.daynames-row>.day, .calendar>.daynames-row>.dayname, .calendar>.days-grid>.day, .calendar>.days-grid>.dayname {
+// 							font-weight: 500;
+// 							line-height: 16px;
+// 							font-size: 14px;
+// 						}
+// 						.calendar>.days-grid>.day {
+// 							border-radius: 50%;
+// 							height: var(--day-height);
+// 							max-height: var(--day-height);
+// 							max-width: var(--day-width);
+// 							min-height: var(--day-height);
+// 							min-width: var(--day-width);
+// 							padding: 10px;
+// 							width: var(--day-width);
+// 						}
+// 						.calendar>.days-grid>.day.today {
+// 							color: var(--color-fg-accent);
+// 							background: #ECF6FF;
+// 						}
+// 						.calendar>.days-grid>.day:hover {
+// 							color: var(--color-fg-primary);
+// 							background: #0085F0
+// 						}
+// 						.container>footer .footer-buttons {
+// 							-moz-column-gap: 5px;
+// 							column-gap: 5px;
+// 							display: flex;
+// 							justify-content: flex-start;
+// 						}
+// 						.container>footer .footer-buttons>button {
+// 							font-weight: 500;
+// 							line-height: 16px;
+// 							font-size: 14px;
+// 							border: none;
+// 							cursor: pointer;
+// 							padding: 10px 12px;
+// 						}
+// 						.container>footer .footer-buttons>button.cancel-button {
+// 							background-color: var(--color-btn-secondary-bg);
+// 							border-color: var(--color-btn-secondary-border);
+// 							color: var(--color-btn-secondary-fg);
+// 							order: 1;
+// 						}
+// 						.container.range-plugin .calendar>.days-grid>.day.end,
+// 						.container.range-plugin .calendar>.days-grid>.day.start {
+// 							background-color: #0085F0;
+// 							color: var(--color-fg-selected)
+// 						}
+// 						.container.range-plugin .calendar>.days-grid>.day.start:after,
+// 						.container.range-plugin .calendar>.days-grid>.day.end:after {
+// 							display: none;
+// 						}
+// 						.container>footer .footer-buttons>button.apply-button:disabled {
+// 							background-color: var(--color-btn-primary-disabled-bg);
+// 							cursor: default;
+// 						}
+// 						.container>footer .footer-buttons>button.apply-button {
+// 							background-color: var(--color-btn-primary-bg);
+// 							border-color: var(--color-btn-primary-border);
+// 							color: #ffffff;
+// 						}
+// 						.container>footer .footer-buttons>button.apply-button:hover {
+// 							background-color: var(--color-btn-primary-hover-bg);
+// 						}
+// 						.calendar>.days-grid>.day.selected {
+// 							background-color: #0085F0;
+// 							color: var(--color-fg-selected);
+// 						}
+//         	`;
+
+// 		const style = document.createElement('style');
+// 		const styleText = document.createTextNode(css);
+// 		style.appendChild(styleText);
+// 		// console.log(this.ui.shadowRoot);
+// 		// console.log(this.ui.wrapper);
+
+// 		this.ui.shadowRoot.append(style);
+// 		this.ui.wrapper.style.display = '';
+// 	},
+// 	setup(pickerTerm) {
+// 		pickerTerm.on('select', evt => {
+// 			const { date } = evt.detail;
+// 			console.log(date);
+// 		});
+// 	},
+// 	zIndex: 10,
+// 	lang: 'ru-RU',
+// 	format: 'DD.MM.YY',
+// 	inline: false,
+// 	grid: 2,
+// 	calendars: 2,
+// 	readonly: true,
+// 	autoApply: false,
+// 	header: `<div class="calendar-header">
+// 						<div class="calendar-header__term">
+// 							<div class="calendar-header__term__wrap _active-term">${termIcon}<span>Срок</span></div><div class="calendar-header__term__wrap">${termStartFinishIcon}<span>Старт-Финиш</span></div>
+// 						</div>
+// 						<div class="calendar-header__close">${calendarCloseBtn}</div>
+// 					</div>`,
+// 	locale: {
+// 		previousMonth: arrowPrevious,
+// 		nextMonth: arrowNext,
+// 		cancel: 'Сбросить',
+// 		apply: 'Применить',
+// 	},
+// });
+
 const pickerTask = new easepick.create({
 	element: '#datepickerTask',
 	// css: ['https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css'],
@@ -276,10 +512,8 @@ const pickerTask = new easepick.create({
 			link.rel = 'stylesheet';
 			const onReady = () => {
 				this.cssLoaded++;
-				// console.log(this.cssLoaded);
 
 				if (this.cssLoaded === cssLinks.length) {
-					// console.log(this.ui.wrapper.style.display);
 					this.ui.wrapper.style.display = '';
 				}
 			};
@@ -288,77 +522,74 @@ const pickerTask = new easepick.create({
 			// console.log(link);
 
 			this.ui.shadowRoot.append(link);
-			console.log(this.ui.shadowRoot);
 		});
 
 		/* append custom style css */
 		const css = `
 						:host {
-							--color-bg-default: #fff;
 							--color-bg-secondary: #ffffff;
-							--color-fg-default: #516173;
-							--color-fg-primary: #6b82ff;
-							--color-fg-secondary: #748194;
+							--color-fg-muted: #7F8FA4;
+							--day-width: 32px;
+							--day-height: 32px;
 							--color-fg-selected: #fff;
-							--color-fg-muted: #9e9e9e;
-							--color-fg-accent: #e63757;
-							--color-btn-primary-bg: #fff;
-							--color-btn-primary-fg: #6b82ff;
-							--color-btn-primary-border: #6b82ff;
-							--color-btn-primary-hover-bg: #6b82ff;
-							--color-btn-primary-hover-fg: #fff;
-							--color-btn-primary-hover-border: #6b82ff;
-							--color-btn-primary-disabled-bg: #a2b0ff;
-							--color-btn-primary-disabled-fg: #fff;
-							--color-btn-primary-disabled-border: #a2b0ff;
+							--color-fg-accent: #1F8EFA;
+							--color-bg-inrange: #ECF6FF;
+							--color-fg-primary: #ffffff;
 							--color-btn-secondary-bg: #fff;
-							--color-btn-secondary-fg: #748194;
 							--color-btn-secondary-border: #748194;
-							--color-btn-secondary-hover-bg: #748194;
-							--color-btn-secondary-hover-fg: #fff;
-							--color-btn-secondary-hover-border: #748194;
-							--color-btn-secondary-disabled-bg: #b5bbc4;
-							--color-btn-secondary-disabled-fg: #fff;
-							--color-btn-secondary-disabled-border: #b5bbc4;
-							--color-border-default: #ddd;
-							--color-border-locked: #f9f9f9;
-							--day-width: 42px;
-							--day-height: 37px;
-							--border-radius: 2px;
-							--primary-color: #6b82ff;
-							--secondary-color: #748194;
-							--white-color: #fff;
-							--black-color: #333;
-							--lightgray-color: #f9f9f9;
-							--gray-color: #9e9e9e;
-							--red-color: #e63757
+							--color-btn-secondary-fg: #748194;
+							--color-fg-default: #516173;
+							--color-btn-primary-disabled-bg: #1F8EFA;
+							--color-btn-primary-bg: #1F8EFA;
+							--color-btn-primary-hover-bg: #1F8EFA;
 						}
 						.container {
 							font-family: 'Golos Text', sans-serif;
 							font-weight: 500;
 							font-size: 14px;
 							line-height: 18px;
+							width: 532px;
 							box-shadow: 0px 5px 27px 0px rgba(27, 36, 49, 0.05), 0px 13px 20px 0px rgba(27, 36, 49, 0.15);
             }
-						.container>footer, .container>header {
+						.container>header {
     					background-color: var(--color-bg-secondary) !important;
-    					padding: 16px 20px;
+    					padding: 12px 16px;
 							border-bottom: 2px solid #DFE3E9;
+						}
+						.container>footer {
+							background-color: var(--color-bg-secondary) !important;
+    					padding: 16px 16px;
+							border-top: 1px solid #DFE3E9;
 						}
 						.calendar-header {
 							display: flex;
 							align-items: center;
 							justify-content: space-between;
 						}
+						._active-term {
+							color: #354052;
+						}
+						._active-term::after {
+							content: '';
+							position: absolute;
+							display: block;
+							width: 100%;
+							height: 2px;
+							background-color: #1F8EFA;
+							bottom: -14px;
+						}
             .calendar-header__term {
 							display: flex;
 							align-items: center;
-							gap: 24px;
+							gap: 16px;
+							font-size: 16px;
 						}
 						.calendar-header__term__wrap {
+							position: relative;
 							display: flex;
 							align-items: center;
 							gap: 6px;
+							padding: 8px 4px;
 							cursor: pointer;
 						}
 						.calendar-header__close {
@@ -366,7 +597,94 @@ const pickerTask = new easepick.create({
 							height: 24px;
 							cursor: pointer;
 						}
-        `;
+						.calendar>.header .month-name {
+							font-weight: 400;
+							line-height: 20px;
+							font-size: 16px;
+							color: #354052;
+						}
+						.calendar>.header .month-name>span {
+							font-weight: 400;
+						}
+						.calendar>.header button {
+							padding: 0px 0px;
+							width: 20px;
+							height: 20px;
+						}
+						.calendar>.header button>img, .calendar>.header button>svg {
+							transform: none;
+						}
+						.calendar>.daynames-row>.dayname {
+							font-weight: 400 !important;
+							color: var(--color-fg-muted);
+							padding: 7px 8px;
+							line-height: 18px;
+						}
+						.calendar>.daynames-row>.day, .calendar>.daynames-row>.dayname, .calendar>.days-grid>.day, .calendar>.days-grid>.dayname {
+							font-weight: 500;
+							line-height: 16px;
+							font-size: 14px;
+						}
+						.calendar>.days-grid>.day {
+							border-radius: 50%;
+							height: var(--day-height);
+							max-height: var(--day-height);
+							max-width: var(--day-width);
+							min-height: var(--day-height);
+							min-width: var(--day-width);
+							padding: 10px;
+							width: var(--day-width);
+						}
+						.calendar>.days-grid>.day.today {
+							color: var(--color-fg-accent);
+							background: #ECF6FF;
+						}
+						.calendar>.days-grid>.day:hover {
+							color: var(--color-fg-primary);
+							background: #0085F0
+						}
+						.container>footer .footer-buttons {
+							-moz-column-gap: 5px;
+							column-gap: 5px;
+							display: flex;
+							justify-content: flex-start;
+						}
+						.container>footer .footer-buttons>button {
+							font-weight: 500;
+							line-height: 16px;
+							font-size: 14px;
+							border: none;
+							cursor: pointer;
+							padding: 10px 12px;
+						}
+						.container>footer .footer-buttons>button.cancel-button {
+							background-color: var(--color-btn-secondary-bg);
+							border-color: var(--color-btn-secondary-border);
+							color: var(--color-btn-secondary-fg);
+							order: 1;
+						}
+						.container.range-plugin .calendar>.days-grid>.day.end,
+						.container.range-plugin .calendar>.days-grid>.day.start {
+							background-color: #0085F0;
+							color: var(--color-fg-selected)
+						}
+						.container.range-plugin .calendar>.days-grid>.day.start:after, 
+						.container.range-plugin .calendar>.days-grid>.day.end:after {
+							display: none;
+						}
+						.container>footer .footer-buttons>button.apply-button:disabled {
+							background-color: var(--color-btn-primary-disabled-bg);
+							cursor: default;
+						}
+						.container>footer .footer-buttons>button.apply-button {
+							background-color: var(--color-btn-primary-bg);
+							border-color: var(--color-btn-primary-border);
+							color: #ffffff;
+						}
+						.container>footer .footer-buttons>button.apply-button:hover {
+							background-color: var(--color-btn-primary-hover-bg);
+						}
+        	`;
 
 		const style = document.createElement('style');
 		const styleText = document.createTextNode(css);
@@ -380,15 +698,14 @@ const pickerTask = new easepick.create({
 	zIndex: 10,
 	lang: 'ru-RU',
 	format: 'DD.MM.YY',
-	inline: true,
+	inline: false,
 	grid: 2,
 	calendars: 2,
 	readonly: true,
 	autoApply: false,
-	// header: `${termIcon}<span>Срок</span></div><div class="calendar-header__term__wrap">${termStartFinishIcon}<span>Старт-Финиш</span>`,
 	header: `<div class="calendar-header">
 						<div class="calendar-header__term">
-							<div class="calendar-header__term__wrap">${termIcon}<span>Срок</span></div><div class="calendar-header__term__wrap">${termStartFinishIcon}<span>Старт-Финиш</span></div>
+							<div class="calendar-header__term__wrap">${termIcon}<span>Срок</span></div><div class="calendar-header__term__wrap _active-term">${termStartFinishIcon}<span>Старт-Финиш</span></div>
 						</div>
 						<div class="calendar-header__close">${calendarCloseBtn}</div>
 					</div>`,
@@ -404,18 +721,219 @@ const pickerTask = new easepick.create({
 	},
 	plugins: [RangePlugin],
 });
+// console.log(pickerTask.ui.container);;
 
 const pickerDeals = new easepick.create({
 	element: '#datepickerDeals',
-	css: ['https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css'],
+	// css: ['https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css'],
+	css: function (s) {
+		// console.log(s);
+		const cssLinks = [
+			'https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.0/dist/index.css',
+		];
+		cssLinks.forEach(cssLink => {
+			const link = document.createElement('link');
+			link.href = cssLink;
+			link.rel = 'stylesheet';
+			const onReady = () => {
+				this.cssLoaded++;
+
+				if (this.cssLoaded === cssLinks.length) {
+					this.ui.wrapper.style.display = '';
+				}
+			};
+			link.addEventListener('load', onReady);
+			link.addEventListener('error', onReady);
+			// console.log(link);
+
+			this.ui.shadowRoot.append(link);
+		});
+
+		/* append custom style css */
+		const css = `
+						:host {
+							--color-bg-secondary: #ffffff;
+							--color-fg-muted: #7F8FA4;
+							--day-width: 32px;
+							--day-height: 32px;
+							--color-fg-selected: #fff;
+							--color-fg-accent: #1F8EFA;
+							--color-bg-inrange: #ECF6FF;
+							--color-fg-primary: #ffffff;
+							--color-btn-secondary-bg: #fff;
+							--color-btn-secondary-border: #748194;
+							--color-btn-secondary-fg: #748194;
+							--color-fg-default: #516173;
+							--color-btn-primary-disabled-bg: #1F8EFA;
+							--color-btn-primary-bg: #1F8EFA;
+							--color-btn-primary-hover-bg: #1F8EFA;
+						}
+						.container {
+							font-family: 'Golos Text', sans-serif;
+							font-weight: 500;
+							font-size: 14px;
+							line-height: 18px;
+							width: 532px;
+							box-shadow: 0px 5px 27px 0px rgba(27, 36, 49, 0.05), 0px 13px 20px 0px rgba(27, 36, 49, 0.15);
+            }
+						.container>header {
+    					background-color: var(--color-bg-secondary) !important;
+    					padding: 12px 16px;
+							border-bottom: 2px solid #DFE3E9;
+						}
+						.container>footer {
+							background-color: var(--color-bg-secondary) !important;
+    					padding: 16px 16px;
+							border-top: 1px solid #DFE3E9;
+						}
+						.calendar-header {
+							display: flex;
+							align-items: center;
+							justify-content: space-between;
+						}
+						._active-term {
+							color: #354052;
+						}
+						._active-term::after {
+							content: '';
+							position: absolute;
+							display: block;
+							width: 100%;
+							height: 2px;
+							background-color: #1F8EFA;
+							bottom: -14px;
+						}
+            .calendar-header__term {
+							display: flex;
+							align-items: center;
+							gap: 16px;
+							font-size: 16px;
+						}
+						.calendar-header__term__wrap {
+							position: relative;
+							display: flex;
+							align-items: center;
+							gap: 6px;
+							padding: 8px 4px;
+							cursor: pointer;
+						}
+						.calendar-header__close {
+							width: 24px;
+							height: 24px;
+							cursor: pointer;
+						}
+						.calendar>.header .month-name {
+							font-weight: 400;
+							line-height: 20px;
+							font-size: 16px;
+							color: #354052;
+						}
+						.calendar>.header .month-name>span {
+							font-weight: 400;
+						}
+						.calendar>.header button {
+							padding: 0px 0px;
+							width: 20px;
+							height: 20px;
+						}
+						.calendar>.header button>img, .calendar>.header button>svg {
+							transform: none;
+						}
+						.calendar>.daynames-row>.dayname {
+							font-weight: 400 !important;
+							color: var(--color-fg-muted);
+							padding: 7px 8px;
+							line-height: 18px;
+						}
+						.calendar>.daynames-row>.day, .calendar>.daynames-row>.dayname, .calendar>.days-grid>.day, .calendar>.days-grid>.dayname {
+							font-weight: 500;
+							line-height: 16px;
+							font-size: 14px;
+						}
+						.calendar>.days-grid>.day {
+							border-radius: 50%;
+							height: var(--day-height);
+							max-height: var(--day-height);
+							max-width: var(--day-width);
+							min-height: var(--day-height);
+							min-width: var(--day-width);
+							padding: 10px;
+							width: var(--day-width);
+						}
+						.calendar>.days-grid>.day.today {
+							color: var(--color-fg-accent);
+							background: #ECF6FF;
+						}
+						.calendar>.days-grid>.day:hover {
+							color: var(--color-fg-primary);
+							background: #0085F0
+						}
+						.container>footer .footer-buttons {
+							-moz-column-gap: 5px;
+							column-gap: 5px;
+							display: flex;
+							justify-content: flex-start;
+						}
+						.container>footer .footer-buttons>button {
+							font-weight: 500;
+							line-height: 16px;
+							font-size: 14px;
+							border: none;
+							cursor: pointer;
+							padding: 10px 12px;
+						}
+						.container>footer .footer-buttons>button.cancel-button {
+							background-color: var(--color-btn-secondary-bg);
+							border-color: var(--color-btn-secondary-border);
+							color: var(--color-btn-secondary-fg);
+							order: 1;
+						}
+						.container.range-plugin .calendar>.days-grid>.day.end,
+						.container.range-plugin .calendar>.days-grid>.day.start {
+							background-color: #0085F0;
+							color: var(--color-fg-selected)
+						}
+						.container.range-plugin .calendar>.days-grid>.day.start:after, 
+						.container.range-plugin .calendar>.days-grid>.day.end:after {
+							display: none;
+						}
+						.container>footer .footer-buttons>button.apply-button:disabled {
+							background-color: var(--color-btn-primary-disabled-bg);
+							cursor: default;
+						}
+						.container>footer .footer-buttons>button.apply-button {
+							background-color: var(--color-btn-primary-bg);
+							border-color: var(--color-btn-primary-border);
+							color: #ffffff;
+						}
+						.container>footer .footer-buttons>button.apply-button:hover {
+							background-color: var(--color-btn-primary-hover-bg);
+						}
+        	`;
+
+		const style = document.createElement('style');
+		const styleText = document.createTextNode(css);
+		style.appendChild(styleText);
+		// console.log(this.ui.shadowRoot);
+		// console.log(this.ui.wrapper);
+
+		this.ui.shadowRoot.append(style);
+		this.ui.wrapper.style.display = '';
+	},
 	zIndex: 10,
 	lang: 'ru-RU',
 	format: 'DD.MM.YY',
+	inline: false,
 	grid: 2,
 	calendars: 2,
 	readonly: false,
 	autoApply: false,
-	header: 'Срок Старт-Финиш',
+	header: `<div class="calendar-header">
+						<div class="calendar-header__term">
+							<div class="calendar-header__term__wrap">${termIcon}<span>Срок</span></div><div class="calendar-header__term__wrap _active-term">${termStartFinishIcon}<span>Старт-Финиш</span></div>
+						</div>
+						<div class="calendar-header__close">${calendarCloseBtn}</div>
+					</div>`,
 	locale: {
 		previousMonth: arrowPrevious,
 		nextMonth: arrowNext,
@@ -826,6 +1344,8 @@ closeSupportBtn.addEventListener('click', closeSupport);
 userBtn.addEventListener('click', toggleUserMenu);
 closePopupBtn.addEventListener('click', popupClose);
 deleteWidgetBtn.addEventListener('click', removeWidget);
-// inputTaskCalendar.addEventListener('click', showCalendar);
+// document.querySelector('#calendarTerm').addEventListener('click', evt => {
+// 	pickerTerm.show(evt);
+// });
 sideBarMoreBtn.addEventListener('click', openHorizontalSideBarMenu);
 horizontalSideBarList.addEventListener('click', selectedItemHorizontalSideBar);
