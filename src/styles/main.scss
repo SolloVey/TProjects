@@ -1231,7 +1231,6 @@ body {
 		}
 
 		&__desc {
-			// position: relative;
 			display: flex;
 			align-items: center;
 			gap: 0.8rem;
@@ -1671,38 +1670,6 @@ body {
 	}
 }
 
-// .air-datepicker-global-container {
-// 	left: 13.2rem !important;
-// 	top: 1.7rem !important;
-// }
-
-//TASK-CALENDAR
-// .task-calendar {
-
-// visibility: hidden;
-
-// &>.widget__header__desc__date {
-// 	opacity: 1;
-// 	visibility: visible;
-// }
-
-// &__open {
-// 	opacity: 1;
-// 	visibility: visible;
-// }
-// }
-
-.calendar-header {
-	display: flex !important;
-}
-
-.container.show {
-	box-shadow: 0 0 25px rgba(223, 5, 5, 0.9) !important;
-}
-
-.container>footer .footer-buttons {
-	-moz-column-gap: 5px;
-	column-gap: 5px;
-	display: flex;
-	justify-content: flex-start !important;
+.input-calendar {
+	display: none;
 }

@@ -1,34 +1,10 @@
 import './styles/reset.css';
 import './styles/main.scss';
-import './styles/calendar.css';
 
 // ********************** CALENDAR ***********************************************************
 // import { easepick } from '@easepick/core';
 import { easepick } from '@easepick/bundle';
 import { RangePlugin } from '@easepick/range-plugin';
-
-// const picker = new easepick.create({
-// 	element: '#datepickerFirst',
-// 	css: ['https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css'],
-// 	zIndex: 10,
-// 	lang: 'ru-RU',
-// 	grid: 2,
-// 	calendars: 2,
-// 	readonly: false,
-// 	autoApply: false,
-// 	header: 'Старт Старт-Финиш',
-// 	locale: {
-// 		previousMonth: '',
-// 		nextMonth: '',
-// 		cancel: 'Сбросить',
-// 		apply: 'Применить',
-// 	},
-// 	RangePlugin: {
-// 		strict: false,
-// 		tooltip: false,
-// 	},
-// 	plugins: ['RangePlugin'],
-// });
 // *******************************************************************************************
 
 // ********************** DIAGRAM ************************************************************
@@ -241,16 +217,6 @@ const widgetHeaderDesc = document.querySelectorAll('.widget__header__desc');
 // ******************
 
 // ***** calendar *****
-
-//  <div class="calendar-header">
-// 					<div class="calendar-header__term">
-// 						<div class="calendar-header__term__wrap">${termIcon}<span>Срок</span></div><div class="calendar-header__term__wrap">${termStartFinishIcon}<span>Старт-Финиш</span></div>
-// 					</div>
-// 					<div className="calendar-header__close">${calendarCloseBtn}</div>
-// 				</div>
-
-// const inputTaskCalendar = document.querySelector('.widget__header__desc__date');
-// const calendar = document.querySelector('.task-calendar');
 const termIcon =
 	'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 1C16.5523 1 17 1.44772 17 2V2.00101H19C20.6569 2.00101 22 3.34415 22 5.00101V20.001C22 21.6579 20.6569 23.001 19 23.001H5C3.34315 23.001 2 21.6579 2 20.001V5.00101C2 3.34415 3.34315 2.00101 5 2.00101H7V2C7 1.44772 7.44772 1 8 1C8.55228 1 9 1.44772 9 2V2.00101H15V2C15 1.44772 15.4477 1 16 1ZM7 4.00101C7.00054 4.55283 7.44805 5 8 5C8.55195 5 8.99946 4.55283 9 4.00101H15C15.0005 4.55283 15.4481 5 16 5C16.5519 5 16.9995 4.55283 17 4.00101H19C19.5523 4.00101 20 4.44872 20 5.00101V7.00101H4V5.00101C4 4.44872 4.44772 4.00101 5 4.00101H7ZM4 9.00101H20V20.001C20 20.5533 19.5523 21.001 19 21.001H5C4.44772 21.001 4 20.5533 4 20.001V9.00101ZM7 11C6.44772 11 6 11.4477 6 12V14C6 14.5523 6.44772 15 7 15H9C9.55228 15 10 14.5523 10 14V12C10 11.4477 9.55228 11 9 11H7Z" fill="#354052"/></svg>';
 const termStartFinishIcon =
@@ -261,242 +227,314 @@ const arrowPrevious =
 	'<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.7071 3.46056C11.0976 3.85108 11.0976 4.48425 10.7071 4.87477L6.58084 9.001H15.8333C16.3856 9.001 16.8333 9.44871 16.8333 10.001C16.8333 10.5533 16.3856 11.001 15.8333 11.001H6.58084L10.7071 15.1272C11.0976 15.5177 11.0976 16.1509 10.7071 16.5414C10.3165 16.932 9.68338 16.932 9.29285 16.5414L3.45952 10.7081C3.06899 10.3176 3.06899 9.68441 3.45952 9.29389L9.29285 3.46056C9.68338 3.07003 10.3165 3.07003 10.7071 3.46056Z" fill="#516173"/></svg>';
 const arrowNext =
 	'<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.29487 3.46056C9.68539 3.07003 10.3186 3.07003 10.7091 3.46056L16.5424 9.29389C16.9329 9.68441 16.9329 10.3176 16.5424 10.7081L10.7091 16.5414C10.3186 16.932 9.68539 16.932 9.29487 16.5414C8.90434 16.1509 8.90434 15.5177 9.29487 15.1272L13.4211 11.001H4.16864C3.61636 11.001 3.16864 10.5533 3.16864 10.001C3.16864 9.44871 3.61636 9.001 4.16864 9.001H13.4211L9.29487 4.87477C8.90434 4.48425 8.90434 3.85108 9.29487 3.46056Z" fill="#516173"/></svg>';
+// ********************
 
-// const pickerTerm = new easepick.create({
-// 	element: '#calendarTerm',
-// 	// css: ['https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css'],
-// 	css: function (s) {
-// 		// console.log(s);
-// 		const cssLinks = [
-// 			'https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.0/dist/index.css',
-// 		];
-// 		cssLinks.forEach(cssLink => {
-// 			const link = document.createElement('link');
-// 			link.href = cssLink;
-// 			link.rel = 'stylesheet';
-// 			const onReady = () => {
-// 				this.cssLoaded++;
+// ***** sidebar *****
+const sideBarMenuBTN = document.querySelector(
+	'.sidebar__item__todo'
+); /* картинка в элементе */
+// const sideBarItemList =
+// 	document.querySelector('.sidebar__items'); /* весь список ul */
+const sideBarItems =
+	document.querySelectorAll('.sidebar__el'); /* все эл. в списке */
+// const sideBarItem = document.querySelector('.sidebar__el'); /* эл. в списке */
+// ********************
 
-// 				if (this.cssLoaded === cssLinks.length) {
-// 					this.ui.wrapper.style.display = '';
-// 				}
-// 			};
-// 			link.addEventListener('load', onReady);
-// 			link.addEventListener('error', onReady);
-// 			// console.log(link);
+// ***** set-user *****
+const userBtn = document.querySelector('.sidebar__item__logo');
+const userMenu = document.querySelector('.set-user');
+// ********************
 
-// 			this.ui.shadowRoot.append(link);
-// 			this.ui.container.classList.add('term-calendar');
+// ***** side-bar *****
+const sideBarMenuList = document.querySelector('.sidebar-menu');
+// ********************
 
-// 			// console.log(this.ui.container);
-// 		});
+// ***** support *****
+const support = document.querySelector('.user-support');
+const supportBtn =
+	document.querySelector('.sidebar__question').firstElementChild;
+const closeSupportBtn = document.querySelector('.user-support__header__close');
+// const supportImg = document.querySelectorAll('.user-support__item__icon__img');
+// **********************
 
-// 		/* append custom style css */
-// 		const css = `
-// 						:host {
-// 							--color-bg-secondary: #ffffff;
-// 							--color-fg-muted: #7F8FA4;
-// 							--day-width: 32px;
-// 							--day-height: 32px;
-// 							--color-fg-selected: #fff;
-// 							--color-fg-accent: #1F8EFA;
-// 							--color-bg-inrange: #ECF6FF;
-// 							--color-fg-primary: #ffffff;
-// 							--color-btn-secondary-bg: #fff;
-// 							--color-btn-secondary-border: #748194;
-// 							--color-btn-secondary-fg: #748194;
-// 							--color-fg-default: #516173;
-// 							--color-btn-primary-disabled-bg: #1F8EFA;
-// 							--color-btn-primary-bg: #1F8EFA;
-// 							--color-btn-primary-hover-bg: #1F8EFA;
-// 						}
-// 						.term-calendar {
-// 							position: fixed;
-// 							top: 80px !important;
-// 						}
-// 						.container {
-// 							font-family: 'Golos Text', sans-serif;
-// 							font-weight: 500;
-// 							font-size: 14px;
-// 							line-height: 18px;
-// 							width: 532px;
-// 							box-shadow: 0px 5px 27px 0px rgba(27, 36, 49, 0.05), 0px 13px 20px 0px rgba(27, 36, 49, 0.15);
-//             }
-// 						.container>header {
-//     					background-color: var(--color-bg-secondary) !important;
-//     					padding: 12px 16px;
-// 							border-bottom: 2px solid #DFE3E9;
-// 						}
-// 						.container>footer {
-// 							background-color: var(--color-bg-secondary) !important;
-//     					padding: 16px 16px;
-// 							border-top: 1px solid #DFE3E9;
-// 						}
-// 						.calendar-header {
-// 							display: flex;
-// 							align-items: center;
-// 							justify-content: space-between;
-// 						}
-// 						._active-term {
-// 							color: #354052;
-// 						}
-// 						._active-term::after {
-// 							content: '';
-// 							position: absolute;
-// 							display: block;
-// 							width: 100%;
-// 							height: 2px;
-// 							background-color: #1F8EFA;
-// 							bottom: -14px;
-// 						}
-//             .calendar-header__term {
-// 							display: flex;
-// 							align-items: center;
-// 							gap: 16px;
-// 							font-size: 16px;
-// 						}
-// 						.calendar-header__term__wrap {
-// 							position: relative;
-// 							display: flex;
-// 							align-items: center;
-// 							gap: 6px;
-// 							padding: 8px 4px;
-// 							cursor: pointer;
-// 						}
-// 						.calendar-header__close {
-// 							width: 24px;
-// 							height: 24px;
-// 							cursor: pointer;
-// 						}
-// 						.calendar>.header .month-name {
-// 							font-weight: 400;
-// 							line-height: 20px;
-// 							font-size: 16px;
-// 							color: #354052;
-// 						}
-// 						.calendar>.header .month-name>span {
-// 							font-weight: 400;
-// 						}
-// 						.calendar>.header button {
-// 							padding: 0px 0px;
-// 							width: 20px;
-// 							height: 20px;
-// 						}
-// 						.calendar>.header button>img, .calendar>.header button>svg {
-// 							transform: none;
-// 						}
-// 						.calendar>.daynames-row>.dayname {
-// 							font-weight: 400 !important;
-// 							color: var(--color-fg-muted);
-// 							padding: 7px 8px;
-// 							line-height: 18px;
-// 						}
-// 						.calendar>.daynames-row>.day, .calendar>.daynames-row>.dayname, .calendar>.days-grid>.day, .calendar>.days-grid>.dayname {
-// 							font-weight: 500;
-// 							line-height: 16px;
-// 							font-size: 14px;
-// 						}
-// 						.calendar>.days-grid>.day {
-// 							border-radius: 50%;
-// 							height: var(--day-height);
-// 							max-height: var(--day-height);
-// 							max-width: var(--day-width);
-// 							min-height: var(--day-height);
-// 							min-width: var(--day-width);
-// 							padding: 10px;
-// 							width: var(--day-width);
-// 						}
-// 						.calendar>.days-grid>.day.today {
-// 							color: var(--color-fg-accent);
-// 							background: #ECF6FF;
-// 						}
-// 						.calendar>.days-grid>.day:hover {
-// 							color: var(--color-fg-primary);
-// 							background: #0085F0
-// 						}
-// 						.container>footer .footer-buttons {
-// 							-moz-column-gap: 5px;
-// 							column-gap: 5px;
-// 							display: flex;
-// 							justify-content: flex-start;
-// 						}
-// 						.container>footer .footer-buttons>button {
-// 							font-weight: 500;
-// 							line-height: 16px;
-// 							font-size: 14px;
-// 							border: none;
-// 							cursor: pointer;
-// 							padding: 10px 12px;
-// 						}
-// 						.container>footer .footer-buttons>button.cancel-button {
-// 							background-color: var(--color-btn-secondary-bg);
-// 							border-color: var(--color-btn-secondary-border);
-// 							color: var(--color-btn-secondary-fg);
-// 							order: 1;
-// 						}
-// 						.container.range-plugin .calendar>.days-grid>.day.end,
-// 						.container.range-plugin .calendar>.days-grid>.day.start {
-// 							background-color: #0085F0;
-// 							color: var(--color-fg-selected)
-// 						}
-// 						.container.range-plugin .calendar>.days-grid>.day.start:after,
-// 						.container.range-plugin .calendar>.days-grid>.day.end:after {
-// 							display: none;
-// 						}
-// 						.container>footer .footer-buttons>button.apply-button:disabled {
-// 							background-color: var(--color-btn-primary-disabled-bg);
-// 							cursor: default;
-// 						}
-// 						.container>footer .footer-buttons>button.apply-button {
-// 							background-color: var(--color-btn-primary-bg);
-// 							border-color: var(--color-btn-primary-border);
-// 							color: #ffffff;
-// 						}
-// 						.container>footer .footer-buttons>button.apply-button:hover {
-// 							background-color: var(--color-btn-primary-hover-bg);
-// 						}
-// 						.calendar>.days-grid>.day.selected {
-// 							background-color: #0085F0;
-// 							color: var(--color-fg-selected);
-// 						}
-//         	`;
+// ***** popup *****
+const popupLinks = document.querySelectorAll('.popup-open');
+const deleteWidgetBtn = document.querySelector('.delete-widget');
+// const removeWidget = document.querySelectorAll('.popup-close');
+const closePopupBtn = document.querySelector('.close-popup');
+// *****************
 
-// 		const style = document.createElement('style');
-// 		const styleText = document.createTextNode(css);
-// 		style.appendChild(styleText);
-// 		// console.log(this.ui.shadowRoot);
-// 		// console.log(this.ui.wrapper);
+// ***** horizontal side bar *****
+const sideBarMoreBtn = document.querySelector(
+	'.sidebar-horizontal__action__more'
+);
+const sideBarMoreList = document.querySelector('.sidebar-horizontal-sub');
+const horizontalSideBarList = document.querySelector(
+	'.sidebar-horizontal__menu__sub__list'
+);
+// *******************************
 
-// 		this.ui.shadowRoot.append(style);
-// 		this.ui.wrapper.style.display = '';
-// 	},
-// 	setup(pickerTerm) {
-// 		pickerTerm.on('select', evt => {
-// 			const { date } = evt.detail;
-// 			console.log(date);
-// 		});
-// 	},
-// 	zIndex: 10,
-// 	lang: 'ru-RU',
-// 	format: 'DD.MM.YY',
-// 	inline: false,
-// 	grid: 2,
-// 	calendars: 2,
-// 	readonly: true,
-// 	autoApply: false,
-// 	header: `<div class="calendar-header">
-// 						<div class="calendar-header__term">
-// 							<div class="calendar-header__term__wrap _active-term">${termIcon}<span>Срок</span></div><div class="calendar-header__term__wrap">${termStartFinishIcon}<span>Старт-Финиш</span></div>
-// 						</div>
-// 						<div class="calendar-header__close">${calendarCloseBtn}</div>
-// 					</div>`,
-// 	locale: {
-// 		previousMonth: arrowPrevious,
-// 		nextMonth: arrowNext,
-// 		cancel: 'Сбросить',
-// 		apply: 'Применить',
-// 	},
-// });
+// ********************** HORISONTAL SIDE-BAR ************************************************
+function openHorizontalSideBarMenu() {
+	sideBarMoreList.classList.add('sidebar-horizontal-sub__open');
+}
+
+function closeHorizontalSideBarMenu() {
+	sideBarMoreList.classList.remove('sidebar-horizontal-sub__open');
+}
+
+function selectedItemHorizontalSideBar(e) {
+	let itemActive = document.querySelector('.__active');
+	let newActiveItem = e.target.closest('.sidebar-horizontal__menu__sub__item');
+
+	if (horizontalSideBarList === e.target || itemActive === newActiveItem)
+		return;
+	newActiveItem.classList.add('__active');
+	if (newActiveItem.classList.contains('__active')) {
+		itemActive.classList.remove('__active');
+	}
+	closeHorizontalSideBarMenu();
+}
+// *******************************************************************************************
+
+// ********************** CALENDAR ***********************************************************
+const pickerTerm = new easepick.create({
+	element: '#calendarTerm',
+	// css: ['https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css'],
+	css: function (s) {
+		// console.log(s);
+		const cssLinks = [
+			'https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.0/dist/index.css',
+		];
+		cssLinks.forEach(cssLink => {
+			const link = document.createElement('link');
+			link.href = cssLink;
+			link.rel = 'stylesheet';
+			const onReady = () => {
+				this.cssLoaded++;
+
+				if (this.cssLoaded === cssLinks.length) {
+					this.ui.wrapper.style.display = '';
+				}
+			};
+			link.addEventListener('load', onReady);
+			link.addEventListener('error', onReady);
+			// console.log(link);
+
+			this.ui.shadowRoot.append(link);
+			this.ui.container.classList.add('term-calendar');
+
+			// console.log(this.ui.container);
+		});
+
+		/* append custom style css */
+		const css = `
+						:host {
+							--color-bg-secondary: #ffffff;
+							--color-fg-muted: #7F8FA4;
+							--day-width: 32px;
+							--day-height: 32px;
+							--color-fg-selected: #fff;
+							--color-fg-accent: #1F8EFA;
+							--color-bg-inrange: #ECF6FF;
+							--color-fg-primary: #ffffff;
+							--color-btn-secondary-bg: #fff;
+							--color-btn-secondary-border: #748194;
+							--color-btn-secondary-fg: #748194;
+							--color-fg-default: #516173;
+							--color-btn-primary-disabled-bg: #1F8EFA;
+							--color-btn-primary-bg: #1F8EFA;
+							--color-btn-primary-hover-bg: #1F8EFA;
+						}
+						.term-calendar {
+							position: fixed;
+							top: 80px !important;
+							left: 555px !important;
+						}
+						.container {
+							font-family: 'Golos Text', sans-serif;
+							font-weight: 500;
+							font-size: 14px;
+							line-height: 18px;
+							width: 532px;
+							box-shadow: 0px 5px 27px 0px rgba(27, 36, 49, 0.05), 0px 13px 20px 0px rgba(27, 36, 49, 0.15);
+            }
+						.container>header {
+    					background-color: var(--color-bg-secondary) !important;
+    					padding: 12px 16px;
+							border-bottom: 2px solid #DFE3E9;
+						}
+						.container>footer {
+							background-color: var(--color-bg-secondary) !important;
+    					padding: 16px 16px;
+							border-top: 1px solid #DFE3E9;
+						}
+						.calendar-header {
+							display: flex;
+							align-items: center;
+							justify-content: space-between;
+						}
+						._active-term {
+							color: #354052;
+						}
+						._active-term::after {
+							content: '';
+							position: absolute;
+							display: block;
+							width: 100%;
+							height: 2px;
+							background-color: #1F8EFA;
+							bottom: -14px;
+						}
+            .calendar-header__term {
+							display: flex;
+							align-items: center;
+							gap: 16px;
+							font-size: 16px;
+						}
+						.calendar-header__term__wrap {
+							position: relative;
+							display: flex;
+							align-items: center;
+							gap: 6px;
+							padding: 8px 4px;
+							cursor: pointer;
+						}
+						.calendar-header__close {
+							width: 24px;
+							height: 24px;
+							cursor: pointer;
+						}
+						.calendar>.header .month-name {
+							font-weight: 400;
+							line-height: 20px;
+							font-size: 16px;
+							color: #354052;
+						}
+						.calendar>.header .month-name>span {
+							font-weight: 400;
+						}
+						.calendar>.header button {
+							padding: 0px 0px;
+							width: 20px;
+							height: 20px;
+						}
+						.calendar>.header button>img, .calendar>.header button>svg {
+							transform: none;
+						}
+						.calendar>.daynames-row>.dayname {
+							font-weight: 400 !important;
+							color: var(--color-fg-muted);
+							padding: 7px 8px;
+							line-height: 18px;
+						}
+						.calendar>.daynames-row>.day, .calendar>.daynames-row>.dayname, .calendar>.days-grid>.day, .calendar>.days-grid>.dayname {
+							font-weight: 500;
+							line-height: 16px;
+							font-size: 14px;
+						}
+						.calendar>.days-grid>.day {
+							border-radius: 50%;
+							height: var(--day-height);
+							max-height: var(--day-height);
+							max-width: var(--day-width);
+							min-height: var(--day-height);
+							min-width: var(--day-width);
+							padding: 10px;
+							width: var(--day-width);
+						}
+						.calendar>.days-grid>.day.today {
+							color: var(--color-fg-accent);
+							background: #ECF6FF;
+						}
+						.calendar>.days-grid>.day:hover {
+							color: var(--color-fg-primary);
+							background: #0085F0
+						}
+						.container>footer .footer-buttons {
+							-moz-column-gap: 5px;
+							column-gap: 5px;
+							display: flex;
+							justify-content: flex-start;
+						}
+						.container>footer .footer-buttons>button {
+							font-weight: 500;
+							line-height: 16px;
+							font-size: 14px;
+							border: none;
+							cursor: pointer;
+							padding: 10px 12px;
+						}
+						.container>footer .footer-buttons>button.cancel-button {
+							background-color: var(--color-btn-secondary-bg);
+							border-color: var(--color-btn-secondary-border);
+							color: var(--color-btn-secondary-fg);
+							order: 1;
+						}
+						.container.range-plugin .calendar>.days-grid>.day.end,
+						.container.range-plugin .calendar>.days-grid>.day.start {
+							background-color: #0085F0;
+							color: var(--color-fg-selected)
+						}
+						.container.range-plugin .calendar>.days-grid>.day.start:after,
+						.container.range-plugin .calendar>.days-grid>.day.end:after {
+							display: none;
+						}
+						.container>footer .footer-buttons>button.apply-button:disabled {
+							background-color: var(--color-btn-primary-disabled-bg);
+							cursor: default;
+						}
+						.container>footer .footer-buttons>button.apply-button {
+							background-color: var(--color-btn-primary-bg);
+							border-color: var(--color-btn-primary-border);
+							color: #ffffff;
+						}
+						.container>footer .footer-buttons>button.apply-button:hover {
+							background-color: var(--color-btn-primary-hover-bg);
+						}
+						.calendar>.days-grid>.day.selected {
+							background-color: #0085F0;
+							color: var(--color-fg-selected);
+						}
+        	`;
+
+		const style = document.createElement('style');
+		const styleText = document.createTextNode(css);
+		style.appendChild(styleText);
+		// console.log(this.ui.shadowRoot);
+		// console.log(this.ui.wrapper);
+
+		this.ui.shadowRoot.append(style);
+		this.ui.wrapper.style.display = '';
+	},
+	setup(pickerTerm) {
+		pickerTerm.on('select', evt => {
+			// this.elementTarget.innerHTML = '';
+			const { date } = evt.detail;
+			console.log(date);
+		});
+	},
+	zIndex: 10,
+	lang: 'ru-RU',
+	format: 'DD.MM.YY',
+	inline: false,
+	grid: 2,
+	calendars: 2,
+	readonly: true,
+	autoApply: false,
+	header: `<div class="calendar-header">
+						<div class="calendar-header__term">
+							<div class="calendar-header__term__wrap _active-term">${termIcon}<span>Срок</span></div><div class="calendar-header__term__wrap">${termStartFinishIcon}<span>Старт-Финиш</span></div>
+						</div>
+						<div class="calendar-header__close">${calendarCloseBtn}</div>
+					</div>`,
+	locale: {
+		previousMonth: arrowPrevious,
+		nextMonth: arrowNext,
+		cancel: 'Сбросить',
+		apply: 'Применить',
+	},
+});
 
 const pickerTask = new easepick.create({
 	element: '#datepickerTask',
@@ -695,6 +733,20 @@ const pickerTask = new easepick.create({
 		this.ui.shadowRoot.append(style);
 		this.ui.wrapper.style.display = '';
 	},
+	setup(pickerTask) {
+		pickerTask.on('select', evt => {
+			const date = evt.detail.start;
+			console.log(evt);
+			console.log(evt.detail.start);
+			console.log(pickerTask.ui);
+		});
+		// создается div равное количеству дней
+		// pickerTask.on('view', event => {
+		// 	// console.log(event);
+		// 	const div = document.createElement('div');
+		// 	pickerTask.ui.container.append(div);
+		// });
+	},
 	zIndex: 10,
 	lang: 'ru-RU',
 	format: 'DD.MM.YY',
@@ -721,7 +773,7 @@ const pickerTask = new easepick.create({
 	},
 	plugins: [RangePlugin],
 });
-// console.log(pickerTask.ui.container);;
+// console.log(pickerTask.ui.container);
 
 const pickerDeals = new easepick.create({
 	element: '#datepickerDeals',
@@ -946,80 +998,6 @@ const pickerDeals = new easepick.create({
 	},
 	plugins: [RangePlugin],
 });
-// ********************
-
-// ***** sidebar *****
-const sideBarMenuBTN = document.querySelector(
-	'.sidebar__item__todo'
-); /* картинка в элементе */
-const sideBarItemList =
-	document.querySelector('.sidebar__items'); /* весь список ul */
-const sideBarItems =
-	document.querySelectorAll('.sidebar__el'); /* все эл. в списке */
-const sideBarItem = document.querySelector('.sidebar__el'); /* эл. в списке */
-// ********************
-
-// ***** set-user *****
-const userBtn = document.querySelector('.sidebar__item__logo');
-const userMenu = document.querySelector('.set-user');
-// ********************
-
-// ***** side-bar *****
-const sideBarMenuList = document.querySelector('.sidebar-menu');
-// ********************
-
-// ***** support *****
-const support = document.querySelector('.user-support');
-const supportBtn =
-	document.querySelector('.sidebar__question').firstElementChild;
-const closeSupportBtn = document.querySelector('.user-support__header__close');
-const supportImg = document.querySelectorAll('.user-support__item__icon__img');
-// **********************
-
-// ***** popup *****
-const popupLinks = document.querySelectorAll('.popup-open');
-const deleteWidgetBtn = document.querySelector('.delete-widget');
-// const removeWidget = document.querySelectorAll('.popup-close');
-const closePopupBtn = document.querySelector('.close-popup');
-// *****************
-
-// ***** horizontal side bar *****
-const sideBarMoreBtn = document.querySelector(
-	'.sidebar-horizontal__action__more'
-);
-const sideBarMoreList = document.querySelector('.sidebar-horizontal-sub');
-const horizontalSideBarList = document.querySelector(
-	'.sidebar-horizontal__menu__sub__list'
-);
-// *******************************
-
-// ********************** HORISONTAL SIDE-BAR ************************************************
-function openHorizontalSideBarMenu() {
-	sideBarMoreList.classList.add('sidebar-horizontal-sub__open');
-}
-
-function closeHorizontalSideBarMenu() {
-	sideBarMoreList.classList.remove('sidebar-horizontal-sub__open');
-}
-
-function selectedItemHorizontalSideBar(e) {
-	let itemActive = document.querySelector('.__active');
-	let newActiveItem = e.target.closest('.sidebar-horizontal__menu__sub__item');
-
-	if (horizontalSideBarList === e.target || itemActive === newActiveItem)
-		return;
-	newActiveItem.classList.add('__active');
-	if (newActiveItem.classList.contains('__active')) {
-		itemActive.classList.remove('__active');
-	}
-	closeHorizontalSideBarMenu();
-}
-// *******************************************************************************************
-
-// ********************** CALENDAR ***********************************************************
-// function showCalendar() {
-// 	calendar.classList.toggle('none');
-// }
 // *******************************************************************************************
 
 // ********************** POP-UP**************************************************************
@@ -1159,6 +1137,7 @@ activeItemsSubMenu.forEach(elem => {
 function activeColorIcon(e) {
 	// ****** Click moreBtn in WIDGET *****
 	if (e.target.closest('.widget__header__more-btn')) {
+		// console.log(e.target.closest('.widget__header__wrapper'));
 		let fillSvg = document.querySelector(
 			`.fill-color[data-fill-color=${
 				e.target.closest('.svg-el').dataset.fillColor
@@ -1344,8 +1323,8 @@ closeSupportBtn.addEventListener('click', closeSupport);
 userBtn.addEventListener('click', toggleUserMenu);
 closePopupBtn.addEventListener('click', popupClose);
 deleteWidgetBtn.addEventListener('click', removeWidget);
-// document.querySelector('#calendarTerm').addEventListener('click', evt => {
-// 	pickerTerm.show(evt);
-// });
+document.querySelector('#term').addEventListener('click', () => {
+	pickerTerm.show();
+});
 sideBarMoreBtn.addEventListener('click', openHorizontalSideBarMenu);
 horizontalSideBarList.addEventListener('click', selectedItemHorizontalSideBar);
