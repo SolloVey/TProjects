@@ -1691,3 +1691,18 @@ body {
 // 	visibility: visible;
 // }
 // }
+
+.calendar-header {
+	display: flex !important;
+}
+
+.container.show {
+	box-shadow: 0 0 25px rgba(223, 5, 5, 0.9) !important;
+}
+
+.container>footer .footer-buttons {
+	-moz-column-gap: 5px;
+	column-gap: 5px;
+	display: flex;
+	justify-content: flex-start !important;
+}
