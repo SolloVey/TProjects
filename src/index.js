@@ -287,13 +287,23 @@ function selectedItemHorizontalSideBar(e) {
 	let itemActive = document.querySelector('.__active');
 	let newActiveItem = e.target.closest('.sidebar-horizontal__menu__sub__item');
 
-	if (horizontalSideBarList === e.target || itemActive === newActiveItem)
+	if (horizontalSideBarList === e.target || itemActive === newActiveItem) {
+		closeHorizontalSideBarMenu();
 		return;
+	}
 	newActiveItem.classList.add('__active');
 	if (newActiveItem.classList.contains('__active')) {
 		itemActive.classList.remove('__active');
 	}
+	changeWorkplaceName(e);
 	closeHorizontalSideBarMenu();
+}
+
+function changeWorkplaceName(e) {
+	const nameWorkplace = document.querySelector(
+		'.sidebar-horizontal__menu__tasks_job'
+	);
+	nameWorkplace.textContent = e.target.innerText;
 }
 // *******************************************************************************************
 

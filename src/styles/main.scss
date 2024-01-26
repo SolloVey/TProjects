@@ -768,6 +768,7 @@ body {
 		font-weight: 700;
 		line-height: 1.4rem;
 		color: $darkColor-3;
+		user-select: none;
 
 		&__tasks {
 			display: flex;
@@ -777,7 +778,6 @@ body {
 
 			&_job {
 				display: inline-block;
-				cursor: pointer;
 			}
 		}
 
