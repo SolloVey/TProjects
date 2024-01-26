@@ -894,6 +894,7 @@ body {
 	box-shadow: 0rem 0.3rem 1.3rem 0rem rgba(27, 36, 49, 0.05), 0rem 0.7rem 1rem 0rem rgba(27, 36, 49, 0.15);
 	visibility: hidden;
 	pointer-events: none;
+	z-index: 997;
 	transition: all 0.3s ease 0s;
 
 	&_action {
